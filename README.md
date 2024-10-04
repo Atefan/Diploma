@@ -1,2 +1,2 @@
 # Diploma
-Diploma work for 
+this is my GitHub repo for my doploma work 
