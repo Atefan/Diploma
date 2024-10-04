@@ -2805,7 +2805,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5080c604-c282-425e-948a-ceca05030bcd")
-		(property "Reference" "Rcc"
+		(property "Reference" "Rcc1"
 			(at 74.295 18.415 90)
 			(effects
 				(font
@@ -2858,7 +2858,7 @@
 		(instances
 			(project "diploma_pcb"
 				(path "/8eade999-89f4-4618-aeea-e9238b0bd165"
-					(reference "Rcc")
+					(reference "Rcc1")
 					(unit 1)
 				)
 			)
@@ -2873,7 +2873,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5b58a754-1036-42ae-bbeb-1315f9b20552")
-		(property "Reference" "RData"
+		(property "Reference" "RData1"
 			(at 58.42 34.925 90)
 			(effects
 				(font
@@ -2926,7 +2926,7 @@
 		(instances
 			(project "diploma_pcb"
 				(path "/8eade999-89f4-4618-aeea-e9238b0bd165"
-					(reference "RData")
+					(reference "RData1")
 					(unit 1)
 				)
 			)
@@ -3302,7 +3302,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a40ce681-f853-4c2e-adf6-e3dfde07d26a")
-		(property "Reference" "R_gnd"
+		(property "Reference" "R_gnd1"
 			(at 74.295 70.485 90)
 			(effects
 				(font
@@ -3355,7 +3355,7 @@
 		(instances
 			(project "diploma_pcb"
 				(path "/8eade999-89f4-4618-aeea-e9238b0bd165"
-					(reference "R_gnd")
+					(reference "R_gnd1")
 					(unit 1)
 				)
 			)
