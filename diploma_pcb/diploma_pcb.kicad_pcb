@@ -982,7 +982,7 @@
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R_LED_R1"
-			(at 0 -1.82 360)
+			(at 0 -1.82 0)
 			(layer "F.SilkS")
 			(uuid "d1dde42d-9c5e-4860-a7cd-6060132aaf40")
 			(effects
@@ -993,7 +993,7 @@
 			)
 		)
 		(property "Value" "R"
-			(at 0 1.82 360)
+			(at 0 1.82 0)
 			(layer "F.Fab")
 			(uuid "6a00a0f7-b7d7-4df7-9e6e-1a876b25f720")
 			(effects
@@ -1148,7 +1148,7 @@
 			(uuid "7ef85975-7837-4894-bc59-b82721c60995")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(uuid "f6d1b4e3-d52c-4492-96db-2b687452389f")
 			(effects
@@ -2335,7 +2335,7 @@
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R_LED_B1"
-			(at 0 -1.82 360)
+			(at 0 -1.82 0)
 			(layer "F.SilkS")
 			(uuid "8e5ca088-760a-4c1c-8fa4-2b5942ed3282")
 			(effects
@@ -2346,7 +2346,7 @@
 			)
 		)
 		(property "Value" "R"
-			(at 0 1.82 360)
+			(at 0 1.82 0)
 			(layer "F.Fab")
 			(uuid "c9af5b48-16db-44bd-9bea-e98159bb7878")
 			(effects
@@ -2501,7 +2501,7 @@
 			(uuid "836fff54-9a7c-4201-a383-cf9728ef9878")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(uuid "93d70a18-29f4-4172-8476-aea804dbb996")
 			(effects
@@ -3187,7 +3187,7 @@
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R_LED_G1"
-			(at 0 -1.82 360)
+			(at 0 -1.82 0)
 			(layer "F.SilkS")
 			(uuid "7d3b174b-236e-42c0-99e2-10e9658faef5")
 			(effects
@@ -3198,7 +3198,7 @@
 			)
 		)
 		(property "Value" "R"
-			(at 0 1.82 360)
+			(at 0 1.82 0)
 			(layer "F.Fab")
 			(uuid "7e1a1ea8-a91a-49f2-bb20-6a10395cae08")
 			(effects
@@ -3353,7 +3353,7 @@
 			(uuid "ed708ea9-5c56-42d5-9ac8-ede1ba5eed98")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(uuid "2cc3a5ef-8b85-40f8-866b-dbe120e37bb1")
 			(effects
