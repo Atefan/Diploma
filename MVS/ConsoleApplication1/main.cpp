@@ -65,25 +65,8 @@ std::vector<uint32_t> generate_random_sequence(int size_in_bits, bool random) {
 int main() {
     NIST_tests tester;
 
-    std::vector<uint32_t> random_sequence1 = generate_random_sequence(2048, false); // (64 uint32_t numbers)
-    std::vector<uint32_t> random_sequence = {
-    0xAAAAAAAA,  // Alternating bits: 10101010...
-    0x55555555,  // Alternating bits: 01010101...
-    0xFFFFFFFF,  // All bits set to 1
-    0x00000000,  // All bits set to 0
-    0x12345678,  // Sequential pattern
-    0x87654321,  // Reverse sequential pattern
-    0xFFFFFF00,  // Upper 24 bits set to 1, lower 8 bits set to 0
-    0x0000FFFF,  // Lower 16 bits set to 1, upper 16 bits set to 0
-    0xCCCCCCCC,  // Alternating pair of 1s and 0s: 11001100...
-    0x33333333,  // Alternating pair of 0s and 1s: 00110011...
-    0x7FFFFFFF,  // All bits set to 1 except the most significant bit
-    0x80000000,  // Only the most significant bit set to 1
-    0xF0F0F0F0,  // Alternating nibbles of 1s and 0s: 11110000...
-    0x0F0F0F0F,  // Alternating nibbles of 0s and 1s: 00001111...
-    0xAAAA5555,  // Half bits alternating: upper 16 bits different from lower 16
-    0x5555AAAA   // Reverse of the previous number
-    };
+    std::vector<uint32_t> random_sequence = generate_random_sequence(2048, false); // (64 uint32_t numbers)
+    
 
     if (tester.frequency_monobit_test(random_sequence)) 
         std::cout << "Monobit test passed." << std::endl;
