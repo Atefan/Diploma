@@ -62,10 +62,29 @@ std::vector<uint32_t> generate_random_sequence(int size_in_bits, bool random) {
     return random_sequence;
 }
 
+
+std::vector<uint32_t> generate_random_sequence_srand(int size_in_bits, bool random) {
+    std::vector<uint32_t> random_sequence;
+
+    std::srand(std::time(0));
+
+    int num_uint32 = size_in_bits / 32;
+    random_sequence.reserve(num_uint32);
+
+    for (int i = 0; i < num_uint32; ++i) {
+        if (random)
+            random_sequence.push_back((uint32_t)std::rand);
+        else
+            random_sequence.push_back(~i * 37);
+    }
+
+    return random_sequence;
+}
+
 int main() {
     NIST_tests tester;
 
-    std::vector<uint32_t> random_sequence = generate_random_sequence(2048, false); // (64 uint32_t numbers)
+    std::vector<uint32_t> random_sequence = generate_random_sequence_srand(2048 * 32, true); // (64 uint32_t numbers)
     
 
     if (tester.frequency_monobit_test(random_sequence)) 
