@@ -21,9 +21,15 @@
     <ClCompile Include="serialib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NIST_tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="serialib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NIST_tests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

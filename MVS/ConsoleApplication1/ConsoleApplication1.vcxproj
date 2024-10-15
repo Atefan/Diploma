@@ -21,9 +21,11 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="serialib.cpp" />
+    <ClCompile Include="NIST_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="serialib.h" />
+    <ClInclude Include="NIST_tests.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
