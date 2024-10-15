@@ -3,6 +3,7 @@
 int main() {
     serialib serial;
     char buffer[128];
+    int cnt = 0;
 
     // Open serial port
     if (serial.openDevice("COM7", 9600) != 1) {
@@ -13,12 +14,19 @@ int main() {
     // Read data
     while (1)
     {
-        int bytesRead = serial.readString(buffer, '!', 128, 5000);
-        if (bytesRead > 0) {
-            std::cout << "Data read: " << buffer << std::endl;
+        if(++cnt == 10)
+        {
+            serial.writeChar('A');
+            cnt = 0;
         }
-        else {
-            printf("No data read\n");
+        else
+        {
+            int bytesRead = serial.readString(buffer, '\n', 128, 5000);
+            if (bytesRead > 0) 
+                std::cout << "Data read: " << buffer << std::endl;
+            else 
+                printf("No data read\n");
+
         }
     }
     
