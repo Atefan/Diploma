@@ -15,15 +15,10 @@ void loop()
 {
     String msg = "";
     // check for data byte on USB serial port
+    uint8_t buffer = 67;
+    Serial.write(&buffer, sizeof (int));
+    Serial.write('\n');
+    
     if (Serial.available())
-    {
-        // get byte from USB serial port
-        while(Serial.available())
-        {
-            msg = Serial.readString();// read the incoming data as string
-        }
-            uint8_t buffer = 67;
-            Serial.write(&buffer, sizeof (int));
-            Serial.write('\n');
-    }
+      blink();
 }
