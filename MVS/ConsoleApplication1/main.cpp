@@ -5,6 +5,9 @@
 #include <random>
 #include <vector>
 
+#define VAR_SIZE sizeof(uint32_t)
+#define BLOCK_SIZE 2048
+
 void test()
 {
     serialib serial;
@@ -41,7 +44,6 @@ void test()
     serial.closeDevice();
 }
 
-
 std::vector<uint32_t> generate_random_sequence(int size_in_bits, bool random) {
     std::vector<uint32_t> random_sequence;
 
@@ -49,7 +51,7 @@ std::vector<uint32_t> generate_random_sequence(int size_in_bits, bool random) {
     std::mt19937 gen(rd());
     std::uniform_int_distribution<uint32_t> dis(0, 0xFFFFFFFF); // [0, 2^32 - 1]
 
-    int num_uint32 = size_in_bits / 32;
+    int num_uint32 = size_in_bits / VAR_SIZE;
     random_sequence.reserve(num_uint32);
 
     for (int i = 0; i < num_uint32; ++i) {
@@ -68,7 +70,7 @@ std::vector<uint32_t> generate_random_sequence_srand(int size_in_bits, bool rand
 
     std::srand(std::time(0));
 
-    int num_uint32 = size_in_bits / 32;
+    int num_uint32 = size_in_bits / VAR_SIZE;
     random_sequence.reserve(num_uint32);
 
     for (int i = 0; i < num_uint32; ++i) {
@@ -84,31 +86,12 @@ std::vector<uint32_t> generate_random_sequence_srand(int size_in_bits, bool rand
 int main() {
     NIST_tests tester;
 
-    std::vector<uint32_t> random_sequence = generate_random_sequence_srand(2048 * 32, true); // (64 uint32_t numbers)
+    std::vector<uint32_t> random_sequence = generate_random_sequence(2048 * VAR_SIZE * 32, true); // (32 blocks or 2048*32 uints)
     
-
-    if (tester.frequency_monobit_test(random_sequence)) 
-        std::cout << "Monobit test passed." << std::endl;
-    else 
-        std::cout << "Monobit test failed." << std::endl;
-
-
-    if (tester.frequency_within_block_test(random_sequence)) 
-        std::cout << "Frequency within block test passed." << std::endl;
-    else 
-        std::cout << "Frequency within block test failed." << std::endl;
-
-
-    if (tester.runs_test(random_sequence)) 
-        std::cout << "Runs test passed." << std::endl;
-    else 
-        std::cout << "Runs test failed." << std::endl;
-
-
-    if (tester.longest_run_of_ones_in_block_test(random_sequence)) 
-        std::cout << "Longest run of ones in block test passed." << std::endl;
-    else 
-        std::cout << "Longest run of ones in block test failed." << std::endl;
-
+    tester.frequency_monobit_test(random_sequence);
+    tester.frequency_within_block_test(random_sequence, BLOCK_SIZE);
+    tester.runs_test(random_sequence);
+    tester.longest_run_of_ones_in_block_test(random_sequence, BLOCK_SIZE);
+    tester.entropy_test(random_sequence);
     return 0;
 }
