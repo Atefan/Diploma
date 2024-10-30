@@ -5,8 +5,7 @@
 #include <linux/slab.h>
 #include <linux/poll.h>
 
-//https://github.com/d0u9/Linux-Device-Driver/tree/master/eg_21_usb_skel
-
+#include "main.h"
 
 #define USB_VENDOR_ID		0x1234
 #define USB_PRODUCT_ID		0x7863
@@ -38,6 +37,7 @@ static void skel_delete(struct kref *kref)
 
 	kfree(dev);
 }
+unsigned int skel_poll(struct file *filp, poll_table *wait);
 
 static struct usb_driver skel_driver;
 
@@ -308,7 +308,7 @@ static int skel_probe(struct usb_interface *interface, const struct usb_device_i
 	}
 
 	pipe = usb_rcvintpipe(dev->udev, dev->int_in_endpointAddr);
-	maxp = usb_maxpacket(dev->udev, pipe, usb_pipeout(pipe));
+	maxp = usb_maxpacket(dev->udev, pipe);
 
 	dev->int_in_buffer = usb_alloc_coherent(dev->udev, 8, GFP_ATOMIC, &dev->irq_urb->transfer_dma);
 	if (!dev->int_in_buffer) {

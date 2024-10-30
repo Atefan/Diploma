@@ -1,0 +1,1 @@
+savedcmd_/media/sf_Driver_shared_folder/my_module.ko := ld -r -m elf_x86_64 -z noexecstack --no-warn-rwx-segments --build-id=sha1  -T scripts/module.lds -o /media/sf_Driver_shared_folder/my_module.ko /media/sf_Driver_shared_folder/my_module.o /media/sf_Driver_shared_folder/my_module.mod.o
