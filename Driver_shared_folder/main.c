@@ -7,8 +7,8 @@
 
 #include "main.h"
 
-#define USB_VENDOR_ID		0x1234
-#define USB_PRODUCT_ID		0x7863
+#define USB_VENDOR_ID		0x1a86
+#define USB_PRODUCT_ID		0x7523
 
 #define to_skel_dev(d)	container_of(d, struct usb_skel, kref)
 
@@ -268,11 +268,11 @@ static int skel_probe(struct usb_interface *interface, const struct usb_device_i
 	struct usb_endpoint_descriptor *bulk_in, *bulk_out, *int_in;
 	int retval = -ENOMEM;
 
-	pr_debug("probe usb\n");
+    printk(KERN_DEBUG "probe usb\n");
 
 	dev = kzalloc(sizeof(struct usb_skel), GFP_KERNEL);
 	if (!dev) {
-		pr_err("Out of memory");
+		printk(KERN_DEBUG "Out of memory");
 		goto error;
 	}
 	kref_init(&dev->kref);
@@ -283,8 +283,7 @@ static int skel_probe(struct usb_interface *interface, const struct usb_device_i
 	retval = usb_find_common_endpoints(interface->cur_altsetting,
 			&bulk_in, &bulk_out, &int_in, NULL);
 	if (retval) {
-		dev_err(&interface->dev,
-			"Could not find both bulk-in and bulk-out endpoints\n");
+		printk(KERN_DEBUG "Could not find both bulk-in and bulk-out endpoints\n");
 		goto error;
 	}
 
@@ -302,7 +301,7 @@ static int skel_probe(struct usb_interface *interface, const struct usb_device_i
 
 	dev->irq_urb = usb_alloc_urb(0, GFP_KERNEL);
 	if (!dev->irq_urb) {
-		pr_err("alloc irq urb failed\n");
+		printk(KERN_DEBUG "alloc irq urb failed\n");
 		retval = -ENOMEM;
 		goto error;
 	}
@@ -313,7 +312,7 @@ static int skel_probe(struct usb_interface *interface, const struct usb_device_i
 	dev->int_in_buffer = usb_alloc_coherent(dev->udev, 8, GFP_ATOMIC, &dev->irq_urb->transfer_dma);
 	if (!dev->int_in_buffer) {
 		retval = -ENOMEM;
-		pr_err("alloc coherent failed\n");
+		printk(KERN_DEBUG "alloc coherent failed\n");
 		goto error;
 	}
 
@@ -322,7 +321,7 @@ static int skel_probe(struct usb_interface *interface, const struct usb_device_i
 			 usb_irq, dev, int_in->bInterval);
 	dev->irq_urb->transfer_flags |= URB_NO_TRANSFER_DMA_MAP;
 
-	pr_debug("int in size: %ld\n", dev->int_in_size);
+	printk(KERN_DEBUG "int in size: %ld\n", dev->int_in_size);
 
 	atomic_set(&dev->can_rd, 0);
 	init_waitqueue_head(&dev->wq);
@@ -331,12 +330,12 @@ static int skel_probe(struct usb_interface *interface, const struct usb_device_i
 	retval = usb_register_dev(interface, &skel_class);
 	if (retval) {
 		/* something prevented us from registering this driver */
-		pr_err("Not able to get a minor for this device.");
+		printk(KERN_DEBUG "Not able to get a minor for this device.");
 		usb_set_intfdata(interface, NULL);
 		goto error;
 	}
 
-	dev_info(&interface->dev, "USB Skeleton device now attached to USBSkel-%d", interface->minor);
+	printk(KERN_DEBUG  "USB Skeleton device now attached to USBSkel-%d", interface->minor);
 	return 0;
 
 error:
