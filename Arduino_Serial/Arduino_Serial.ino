@@ -16,7 +16,7 @@ void loop()
 {
     char * msg = 0;
     // check for data byte on USB serial port
-    uint8_t buffer = 67;
+    uint8_t buffer = 0b01010101;
     Serial.write(&buffer, sizeof (int));
     Serial.write('\n');
 
