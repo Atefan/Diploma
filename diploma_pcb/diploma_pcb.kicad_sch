@@ -1904,6 +1904,12 @@
 		(uuid "3fb51f6b-eb96-4df9-ba0c-da197598ca38")
 	)
 	(junction
+		(at 85.09 66.04)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "406a77c9-d42f-4aec-83c3-2d0c33c1086f")
+	)
+	(junction
 		(at 74.295 29.21)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2485,6 +2491,17 @@
 	)
 	(wire
 		(pts
+			(xy 85.09 66.04) (xy 111.125 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+			(color 0 0 255 1)
+		)
+		(uuid "95cbd908-0e2f-4170-aa9a-31aecce99982")
+	)
+	(wire
+		(pts
 			(xy 97.79 14.605) (xy 109.855 14.605)
 		)
 		(stroke
@@ -2518,7 +2535,7 @@
 	)
 	(wire
 		(pts
-			(xy 74.295 66.04) (xy 111.125 66.04)
+			(xy 74.295 66.04) (xy 85.09 66.04)
 		)
 		(stroke
 			(width 0)
@@ -2681,7 +2698,7 @@
 	)
 	(wire
 		(pts
-			(xy 59.69 24.13) (xy 59.69 26.035)
+			(xy 59.69 24.13) (xy 59.69 26.67)
 		)
 		(stroke
 			(width 0)
@@ -3303,7 +3320,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 59.69 33.655 0)
+		(at 59.69 34.29 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3312,7 +3329,7 @@
 		(fields_autoplaced yes)
 		(uuid "17f898d3-4f41-40a4-a833-eb213a809970")
 		(property "Reference" "#PWR011"
-			(at 59.69 40.005 0)
+			(at 59.69 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3321,7 +3338,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 59.69 38.735 0)
+			(at 59.69 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3329,7 +3346,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 59.69 33.655 0)
+			(at 59.69 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3338,7 +3355,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 59.69 33.655 0)
+			(at 59.69 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3347,7 +3364,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 59.69 33.655 0)
+			(at 59.69 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3744,13 +3761,12 @@
 				)
 			)
 		)
-		(property "Value" "R"
-			(at 78.105 18.415 90)
+		(property "Value" "3k"
+			(at 77.978 19.812 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
@@ -3790,6 +3806,142 @@
 			(project "diploma_pcb"
 				(path "/8eade999-89f4-4618-aeea-e9238b0bd165"
 					(reference "Rcc1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 85.09 69.85 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "55bdd76b-39ab-4fb7-8f0f-97c270b513fd")
+		(property "Reference" "C2"
+			(at 88.9 70.485 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" ".1uF"
+			(at 88.265 73.025 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 84.1248 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 85.09 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 85.09 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "379b42a4-4cd9-4a83-bcfd-e33ec0137480")
+		)
+		(pin "2"
+			(uuid "b5e12884-397f-40e8-8d19-e74048698206")
+		)
+		(instances
+			(project "diploma_pcb"
+				(path "/8eade999-89f4-4618-aeea-e9238b0bd165"
+					(reference "C2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 85.09 73.66 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "564b380b-85a4-43f1-90d8-81e08df7ebc4")
+		(property "Reference" "#PWR012"
+			(at 85.09 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 85.09 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 85.09 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 85.09 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 85.09 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "75b88cee-779f-4e17-9fcd-e24b4e397a7e")
+		)
+		(instances
+			(project "diploma_pcb"
+				(path "/8eade999-89f4-4618-aeea-e9238b0bd165"
+					(reference "#PWR012")
 					(unit 1)
 				)
 			)
@@ -4460,7 +4612,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 59.69 29.845 0)
+		(at 59.69 30.48 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4469,7 +4621,7 @@
 		(dnp no)
 		(uuid "9b7cb10b-3fbf-46a2-9e22-a314282c563b")
 		(property "Reference" "C1"
-			(at 63.5 30.48 0)
+			(at 63.5 31.115 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4478,7 +4630,7 @@
 			)
 		)
 		(property "Value" ".1uF"
-			(at 62.865 33.02 0)
+			(at 62.865 33.655 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4487,7 +4639,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 58.7248 33.655 0)
+			(at 58.7248 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4496,7 +4648,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 59.69 29.845 0)
+			(at 59.69 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4505,7 +4657,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 59.69 29.845 0)
+			(at 59.69 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4775,13 +4927,12 @@
 				)
 			)
 		)
-		(property "Value" "R"
-			(at 78.105 70.485 90)
+		(property "Value" "3k"
+			(at 78.994 74.168 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
@@ -5320,13 +5471,12 @@
 				)
 			)
 		)
-		(property "Value" "R"
-			(at 45.085 30.48 90)
+		(property "Value" "1K"
+			(at 45.72 31.242 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"

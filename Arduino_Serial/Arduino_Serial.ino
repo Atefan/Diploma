@@ -3,6 +3,12 @@ void setup()
 {
     // initialize serial ports
     pinMode(LED_BUILTIN, OUTPUT);
+        
+    // if analog input pin 0 is unconnected, random analog
+    // noise will cause the call to randomSeed() to generate
+    // different seed numbers each time the sketch runs.
+    // randomSeed() will then shuffle the random function.
+    randomSeed(analogRead(0));
     Serial.begin(9600);    // USB serial port 0
 }
 void blink() {
@@ -14,17 +20,14 @@ void blink() {
 
 void loop()
 {
-    char * msg = 0;
-    // check for data byte on USB serial port
-    uint8_t buffer = 0b01010101;
-    Serial.write(&buffer, sizeof (int));
-    Serial.write('\n');
-
-    // check if received messages
-    if (Serial.available()>0){
-      //clear the buffer
-      while(Serial.available())msg = Serial.read();
-      //then indicate
-      blink();
-    }
+  char *msg;
+  long randNumber= random(1<<15 - 1);
+  Serial.println(randNumber, BIN);
+  // check if received messages
+  if (Serial.available()>0){
+    //clear the buffer
+    while(Serial.available())msg = Serial.read();
+    //then indicate
+    blink();
+  }
 }
