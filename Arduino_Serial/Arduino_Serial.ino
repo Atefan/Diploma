@@ -1,9 +1,17 @@
-
+#define RED 8 
+#define GREEN 9 
+#define BLUE 10 
 void setup()
 {
     // initialize serial ports
     pinMode(LED_BUILTIN, OUTPUT);
-        
+    pinMode(RED, OUTPUT);
+    pinMode(GREEN, OUTPUT);
+    pinMode(BLUE, OUTPUT);
+    
+    digitalWrite(RED, HIGH);
+    digitalWrite(GREEN, HIGH);
+    digitalWrite(BLUE, HIGH);    
     // if analog input pin 0 is unconnected, random analog
     // noise will cause the call to randomSeed() to generate
     // different seed numbers each time the sketch runs.
