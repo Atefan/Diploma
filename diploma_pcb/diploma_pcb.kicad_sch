@@ -3393,7 +3393,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "270df327-94e0-42c2-9214-91e225b1d984")
-		(property "Reference" "R3"
+		(property "Reference" "Rf"
 			(at 91.44 64.77 90)
 			(effects
 				(font
@@ -3401,13 +3401,12 @@
 				)
 			)
 		)
-		(property "Value" "R"
-			(at 91.44 58.42 90)
+		(property "Value" "510к"
+			(at 91.694 62.23 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
@@ -3446,7 +3445,7 @@
 		(instances
 			(project "diploma_pcb"
 				(path "/8eade999-89f4-4618-aeea-e9238b0bd165"
-					(reference "R3")
+					(reference "Rf")
 					(unit 1)
 				)
 			)
@@ -4022,7 +4021,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5b58a754-1036-42ae-bbeb-1315f9b20552")
-		(property "Reference" "RData1"
+		(property "Reference" "Rg"
 			(at 64.135 47.625 90)
 			(effects
 				(font
@@ -4030,13 +4029,12 @@
 				)
 			)
 		)
-		(property "Value" "R"
-			(at 64.135 40.64 90)
+		(property "Value" "15к"
+			(at 64.008 44.45 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
@@ -4075,7 +4073,7 @@
 		(instances
 			(project "diploma_pcb"
 				(path "/8eade999-89f4-4618-aeea-e9238b0bd165"
-					(reference "RData1")
+					(reference "Rg")
 					(unit 1)
 				)
 			)
@@ -5471,7 +5469,7 @@
 				)
 			)
 		)
-		(property "Value" "1K"
+		(property "Value" "510"
 			(at 45.72 31.242 0)
 			(effects
 				(font
