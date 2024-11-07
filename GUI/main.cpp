@@ -2,11 +2,11 @@
 #include <bitset>
 #include <SDL.h>
 #include "serialib.h"
+#include <SDL_ttf.h>
 
 #define SCREEN_WIDTH 1200
 #define SCREEN_HEIGHT 800
 #define BORDER_SIZE 700
-
 
 class Matrix {
 public:
@@ -57,14 +57,81 @@ private:
     int width;
     int height;
 };
+
+
+class Button {
+public:
+    Button(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font)
+        : x(x), y(y), width(width), height(height), color(color), available(available), text(text), font(font) {}
+
+    void render(SDL_Renderer* renderer) {
+        if (!available) return;
+
+        SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+        SDL_Rect buttonRect = { x, y, width, height };
+        SDL_RenderFillRect(renderer, &buttonRect);
+
+        SDL_Color textColor = { 255, 255, 255, 255 };  // White
+        SDL_Surface* textSurface = TTF_RenderText_Blended(font, text.c_str(), textColor);
+        if (textSurface) {
+            SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+
+            int textWidth = textSurface->w;
+            int textHeight = textSurface->h;
+            SDL_FreeSurface(textSurface);
+
+            SDL_Rect textRect = { x + (width - textWidth) / 2, y + (height - textHeight) / 2, textWidth, textHeight };
+            SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
+
+            SDL_DestroyTexture(textTexture);
+        }
+    }
+
+    void handleEvent(SDL_Event* event) {
+        if (!available) return;
+
+        if (event->type == SDL_MOUSEBUTTONDOWN) {
+            int mouseX, mouseY;
+            SDL_GetMouseState(&mouseX, &mouseY);
+
+            if (mouseX >= x && mouseX <= x + width &&
+                mouseY >= y && mouseY <= y + height) {
+                onClick();
+            }
+        }
+    }
+
+    void setColor(SDL_Color newColor) {
+        color = newColor;
+    }
+
+    void setAvailable(bool isAvailable) {
+        available = isAvailable;
+    }
+
+    void onClick() {
+        std::cout << "Button clicked!" << std::endl;
+    }
+
+private:
+    int x, y;
+    int width, height;
+    SDL_Color color;
+    bool available;
+    std::string text;
+    TTF_Font* font;
+};
+
 class SDLSerialVisualizer {
 public:
+
     bool StopWhenFiled = true;
 
     SDLSerialVisualizer(const char* port, int baudRate)
-        : port(port), baudRate(baudRate), window(nullptr), renderer(nullptr), quit(false), matrix(8, 8) {}
+        : port(port), baudRate(baudRate), window(nullptr), renderer(nullptr), quit(false), matrix(8, 8), myButton(nullptr) {}
 
     ~SDLSerialVisualizer() {
+        TTF_Quit();
         serial.closeDevice();
         if (renderer) SDL_DestroyRenderer(renderer);
         if (window) SDL_DestroyWindow(window);
@@ -96,7 +163,20 @@ public:
             return false;
         }
 
-        // Clear screen to black
+        if (TTF_Init() == -1) {
+            std::cout << "SDL_ttf could not initialize! TTF_Error: " << TTF_GetError() << "\n";
+            return false;
+        }
+        
+        TTF_Font* font = TTF_OpenFont("./fonts/CalligraphyFLF.ttf", 24);  // Specify the correct path to your TTF font
+        if (!font) {
+            std::cout << "Failed to load font! TTF_Error: " << TTF_GetError() << "\n";
+            return false;
+        }
+
+        SDL_Color buttonColor = { 0, 0, 255, 255 };
+        myButton = new Button(200, 150, 100, 50, buttonColor, true, "Button 1", font);
+        
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
@@ -116,24 +196,14 @@ public:
                 if (e.type == SDL_QUIT) {
                     quit = true;
                 }
-            }
-            //if filled, either quit, either reset index
-            if (matrix.last_index >= (BORDER_SIZE - 2) * (BORDER_SIZE - 2))
-                if (StopWhenFiled)
-                {
-                    SDL_Delay(3'000);
-                    return;
-                }
-                else
-                    matrix.last_index = 0;
 
-            int dataSize = 0;
-            char* data = readData(&dataSize);
-
-            if (data != nullptr) {
-                matrix.render(renderer, data, dataSize);
-                delete[] data;  // Free allocated memory after rendering
+                myButton->handleEvent(&e);
             }
+            
+            myButton->render(renderer);
+
+
+            SDL_RenderPresent(renderer);
         }
     }
 
@@ -165,6 +235,8 @@ private:
     const char* port;
     int baudRate;
     bool quit;
+
+    Button *myButton;
     Matrix matrix;
 };
 
