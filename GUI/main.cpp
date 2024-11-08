@@ -3,10 +3,44 @@
 #include <SDL.h>
 #include "serialib.h"
 #include <SDL_ttf.h>
+#include <vector>
 
 #define SCREEN_WIDTH 1200
 #define SCREEN_HEIGHT 800
 #define BORDER_SIZE 700
+
+#define BUTTON_8 12345
+#define BUTTON_16 2345
+#define BUTTON_32 3456
+#define BUTTON_64 4567
+#define BUTTON_STREAM 5678
+#define BUTTON_FILE 6789
+
+
+enum class Color {
+    RED,
+    GREEN,
+    BLUE,
+    WHITE,
+    BLACK,
+    YELLOW,
+    CYAN,
+    MAGENTA
+};
+
+SDL_Color getColor(Color color) {
+    switch (color) {
+    case Color::RED:      return { 255, 0, 0, 255 };
+    case Color::GREEN:    return { 0, 255, 0, 255 };
+    case Color::BLUE:     return { 0, 0, 255, 255 };
+    case Color::WHITE:    return { 255, 255, 255, 255 };
+    case Color::BLACK:    return { 0, 0, 0, 255 };
+    case Color::YELLOW:   return { 255, 255, 0, 255 };
+    case Color::CYAN:     return { 0, 255, 255, 255 };
+    case Color::MAGENTA:  return { 255, 0, 255, 255 };
+    default:              return { 0, 0, 0, 255 }; // Default to black if unknown
+    }
+}
 
 class Matrix {
 public:
@@ -58,13 +92,22 @@ private:
     int height;
 };
 
+class Obj {
 
-class Button {
 public:
-    Button(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font)
-        : x(x), y(y), width(width), height(height), color(color), available(available), text(text), font(font) {}
+    virtual ~Obj() {}
 
-    void render(SDL_Renderer* renderer) {
+    virtual void render(SDL_Renderer* renderer) = 0;
+    virtual void handleEvent(SDL_Event* event) = 0;
+};
+
+
+class Button :public Obj {
+public:
+    Button(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id)
+        : x(x), y(y), width(width), height(height), color(color), available(available), text(text), font(font), id(id) {}
+
+    void render(SDL_Renderer* renderer) override {
         if (!available) return;
 
         SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
@@ -87,7 +130,7 @@ public:
         }
     }
 
-    void handleEvent(SDL_Event* event) {
+    void handleEvent(SDL_Event* event) override {
         if (!available) return;
 
         if (event->type == SDL_MOUSEBUTTONDOWN) {
@@ -110,10 +153,11 @@ public:
     }
 
     void onClick() {
-        std::cout << "Button clicked!" << std::endl;
+        std::cout << "Button " << id <<" clicked!" << std::endl;
     }
 
 private:
+    int id;
     int x, y;
     int width, height;
     SDL_Color color;
@@ -128,9 +172,13 @@ public:
     bool StopWhenFiled = true;
 
     SDLSerialVisualizer(const char* port, int baudRate)
-        : port(port), baudRate(baudRate), window(nullptr), renderer(nullptr), quit(false), matrix(8, 8), myButton(nullptr) {}
+        : port(port), baudRate(baudRate), window(nullptr), renderer(nullptr), quit(false) {}
 
     ~SDLSerialVisualizer() {
+        for (auto obj : objects) {
+            delete obj;
+        }
+        objects.clear();
         TTF_Quit();
         serial.closeDevice();
         if (renderer) SDL_DestroyRenderer(renderer);
@@ -174,8 +222,7 @@ public:
             return false;
         }
 
-        SDL_Color buttonColor = { 0, 0, 255, 255 };
-        myButton = new Button(200, 150, 100, 50, buttonColor, true, "Button 1", font);
+        createButtons(font);
         
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
@@ -196,11 +243,12 @@ public:
                 if (e.type == SDL_QUIT) {
                     quit = true;
                 }
-
-                myButton->handleEvent(&e);
+                for (auto obj : objects) 
+                    obj->handleEvent(&e);
             }
-            
-            myButton->render(renderer);
+
+            for (auto obj : objects)
+                obj->render(renderer);
 
 
             SDL_RenderPresent(renderer);
@@ -226,8 +274,38 @@ public:
         return data;
     }
 
-
 private:
+    void createButtons(TTF_Font* font)
+    {
+        Button* myButton = 0;
+        SDL_Color buttonColor;
+
+        buttonColor = getColor(Color::RED);
+        myButton = new Button(200, 150, 100, 50, buttonColor, true, "8 Bit", font, BUTTON_8);
+        objects.push_back(myButton);
+
+        buttonColor = getColor(Color::GREEN);
+        myButton = new Button(350, 150, 100, 50, buttonColor, true, "16 Bit", font, BUTTON_16);
+        objects.push_back(myButton);
+
+        buttonColor = getColor(Color::BLUE);
+        myButton = new Button(600, 150, 100, 50, buttonColor, true, "32 Bit", font, BUTTON_32);
+        objects.push_back(myButton);
+
+        buttonColor = getColor(Color::CYAN);
+        myButton = new Button(200, 300, 100, 50, buttonColor, true, "64 Bit", font, BUTTON_64);
+        objects.push_back(myButton);
+
+        buttonColor = getColor(Color::MAGENTA);
+        myButton = new Button(350, 300, 100, 50, buttonColor, true, "Stream mode", font, BUTTON_STREAM);
+        objects.push_back(myButton);
+
+        buttonColor = getColor(Color::YELLOW);
+        myButton = new Button(600, 300, 100, 50, buttonColor, true, "File", font, BUTTON_FILE);
+        objects.push_back(myButton);
+    }
+
+    std::vector<Obj*> objects;
     char* readData();
     SDL_Window* window;
     SDL_Renderer* renderer;
@@ -236,14 +314,12 @@ private:
     int baudRate;
     bool quit;
 
-    Button *myButton;
-    Matrix matrix;
 };
 
 
 // Main function
 int main(int argc, char* args[]) {
-    SDLSerialVisualizer visualizer("COM9", 9600);
+    SDLSerialVisualizer visualizer("COM7", 9600);
 
     if (!visualizer.setup()) {
         std::cout << "Failed to initialize!\n";
