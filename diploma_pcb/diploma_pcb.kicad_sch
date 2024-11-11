@@ -1993,6 +1993,94 @@
 		(color 0 0 0 0)
 		(uuid "f4897008-64c7-4833-b09e-4aa399e9dfbc")
 	)
+	(no_connect
+		(at 179.07 59.69)
+		(uuid "04f678f8-279e-4e44-a2e6-0c67523f4b6c")
+	)
+	(no_connect
+		(at 153.67 44.45)
+		(uuid "12de8ee8-adb1-4509-8c7d-757084940d21")
+	)
+	(no_connect
+		(at 153.67 59.69)
+		(uuid "39382890-30ad-42a5-bb23-784f23d7a5a8")
+	)
+	(no_connect
+		(at 153.67 41.91)
+		(uuid "4212828d-7f2b-4651-b1d5-830da44a4ceb")
+	)
+	(no_connect
+		(at 179.07 64.77)
+		(uuid "428128bf-3dea-4838-bacf-f656389d1a3e")
+	)
+	(no_connect
+		(at 163.83 21.59)
+		(uuid "4288e0db-aad4-44a0-b906-867bf4ec2980")
+	)
+	(no_connect
+		(at 153.67 62.23)
+		(uuid "4594d8ce-509d-4acd-a20d-776559ece04d")
+	)
+	(no_connect
+		(at 179.07 49.53)
+		(uuid "51370207-9966-45e5-b47b-d5947aa83929")
+	)
+	(no_connect
+		(at 179.07 54.61)
+		(uuid "5b6ef853-eb83-4d1b-aac3-04293731271e")
+	)
+	(no_connect
+		(at 179.07 41.91)
+		(uuid "5c875d24-3dde-4061-9a80-86d84c470ccd")
+	)
+	(no_connect
+		(at 179.07 62.23)
+		(uuid "5d1c5f83-8d02-4ef7-95a9-6bb5ea694436")
+	)
+	(no_connect
+		(at 153.67 34.29)
+		(uuid "5d7ee080-a297-43f2-a2a1-61b1989ea5fa")
+	)
+	(no_connect
+		(at 153.67 64.77)
+		(uuid "669b95fd-5702-4a8d-a2dc-657bde463a3b")
+	)
+	(no_connect
+		(at 153.67 36.83)
+		(uuid "72dbd397-32fc-4e2c-bd80-080197bf9145")
+	)
+	(no_connect
+		(at 179.07 31.75)
+		(uuid "a81a2711-feeb-4486-9702-556980626cf0")
+	)
+	(no_connect
+		(at 153.67 39.37)
+		(uuid "a83c445d-fd62-4caf-9476-0e37785b8334")
+	)
+	(no_connect
+		(at 179.07 52.07)
+		(uuid "cf092852-fa87-4567-b9fe-95ebdd3cf9a0")
+	)
+	(no_connect
+		(at 179.07 57.15)
+		(uuid "d0dd3438-081e-4ded-8db8-2fca629869c3")
+	)
+	(no_connect
+		(at 153.67 29.21)
+		(uuid "e8ab3170-22ac-4bb6-99c1-3b5970e538e2")
+	)
+	(no_connect
+		(at 153.67 26.67)
+		(uuid "eedfe2e6-172b-43e7-9059-24f76caf228b")
+	)
+	(no_connect
+		(at 179.07 34.29)
+		(uuid "f37bdee1-7165-4395-8f1c-d475503b62cb")
+	)
+	(no_connect
+		(at 153.67 46.99)
+		(uuid "f3bfcca0-3694-4045-a6e8-e25192869a1c")
+	)
 	(wire
 		(pts
 			(xy 122.555 55.245) (xy 122.555 62.23)
@@ -2934,6 +3022,28 @@
 			)
 		)
 	)
+	(global_label "input , before cap, after cap, after op amp"
+		(shape input)
+		(at 78.74 96.52 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "78137892-dec4-412e-adff-4ffc8be24291")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 124.0579 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "red"
 		(shape input)
 		(at 139.7 67.31 180)
@@ -2991,6 +3101,28 @@
 		(uuid "bfaaac48-94ea-4e52-8800-54528b5092f4")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 85.0512 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "dc coupling"
+		(shape input)
+		(at 130.81 40.64 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "cb4d75e0-60a9-41f3-978d-2e5e86c7f2e9")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 145.104 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3061,13 +3193,12 @@
 				)
 			)
 		)
-		(property "Value" "R"
-			(at 149.86 58.42 90)
+		(property "Value" "220"
+			(at 149.86 54.61 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
@@ -3393,7 +3524,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "270df327-94e0-42c2-9214-91e225b1d984")
-		(property "Reference" "Rf"
+		(property "Reference" "Rf1"
 			(at 91.44 64.77 90)
 			(effects
 				(font
@@ -3445,7 +3576,7 @@
 		(instances
 			(project "diploma_pcb"
 				(path "/8eade999-89f4-4618-aeea-e9238b0bd165"
-					(reference "Rf")
+					(reference "Rf1")
 					(unit 1)
 				)
 			)
@@ -3468,13 +3599,12 @@
 				)
 			)
 		)
-		(property "Value" "R"
-			(at 149.86 55.88 90)
+		(property "Value" "220"
+			(at 149.86 52.07 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
@@ -3536,13 +3666,12 @@
 				)
 			)
 		)
-		(property "Value" "R"
-			(at 149.86 53.34 90)
+		(property "Value" "220"
+			(at 149.86 49.53 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
@@ -4021,7 +4150,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5b58a754-1036-42ae-bbeb-1315f9b20552")
-		(property "Reference" "Rg"
+		(property "Reference" "Rg1"
 			(at 64.135 47.625 90)
 			(effects
 				(font
@@ -4073,7 +4202,7 @@
 		(instances
 			(project "diploma_pcb"
 				(path "/8eade999-89f4-4618-aeea-e9238b0bd165"
-					(reference "Rg")
+					(reference "Rg1")
 					(unit 1)
 				)
 			)
@@ -5469,7 +5598,7 @@
 				)
 			)
 		)
-		(property "Value" "510"
+		(property "Value" "2k"
 			(at 45.72 31.242 0)
 			(effects
 				(font
