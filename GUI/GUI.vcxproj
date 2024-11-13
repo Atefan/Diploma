@@ -133,11 +133,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="ColorUnits.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NumberDisplay.cpp" />
+    <ClCompile Include="SDLSerialVisualizer.cpp" />
     <ClCompile Include="serialib.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="ColorUtils.h" />
+    <ClInclude Include="Constants.h" />
+    <ClInclude Include="NumberDisplay.h" />
+    <ClInclude Include="Obj.h" />
+    <ClInclude Include="SDLSerialVisualizer.h" />
     <ClInclude Include="serialib.h" />
+    <ClInclude Include="SerialManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

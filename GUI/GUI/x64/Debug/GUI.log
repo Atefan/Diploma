@@ -1,2 +1,6 @@
-﻿  main.cpp
-  GUI.vcxproj -> C:\Users\GES2SF\everything\Diploma\Diploma\GUI\x64\Debug\GUI.exe
+﻿  Button.cpp
+C:\Users\GES2SF\everything\Diploma\Diploma\GUI\Button.cpp(77,39): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
+C:\Users\GES2SF\everything\Diploma\Diploma\GUI\Button.cpp(87,39): warning C4101: 'e': unreferenced local variable
+Button.obj : error LNK2001: unresolved external symbol "class serialib serial" (?serial@@3Vserialib@@A)
+SDLSerialVisualizer.obj : error LNK2001: unresolved external symbol "class serialib serial" (?serial@@3Vserialib@@A)
+C:\Users\GES2SF\everything\Diploma\Diploma\GUI\x64\Debug\GUI.exe : fatal error LNK1120: 1 unresolved externals

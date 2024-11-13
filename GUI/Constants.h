@@ -1,0 +1,15 @@
+#pragma once
+
+
+#define COM "COM9"
+
+#define SCREEN_WIDTH 1200
+#define SCREEN_HEIGHT 800
+#define BORDER_SIZE 700
+
+#define BUTTON_8 12345
+#define BUTTON_16 2345
+#define BUTTON_32 3456
+#define BUTTON_64 4567
+#define BUTTON_STREAM 5678
+#define BUTTON_FILE 6789
