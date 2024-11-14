@@ -93,11 +93,11 @@ void SDLSerialVisualizer::createButtons(TTF_Font* font) {
     objects.push_back(myButton);
 
     buttonColor = getColor(Color::GREEN);
-    myButton = new Button16Bit(350, 150, 100, 50, buttonColor, true, "16 Bit", font, BUTTON_16);
+    myButton = new Button16Bit(350, 150, 100, 50, buttonColor, true, "16 Bit", font, BUTTON_16, this);
     objects.push_back(myButton);
 
     buttonColor = getColor(Color::BLUE);
-    myButton = new Button32Bit(600, 150, 100, 50, buttonColor, true, "32 Bit", font, BUTTON_32);
+    myButton = new Button32Bit(600, 150, 100, 50, buttonColor, true, "32 Bit", font, BUTTON_32, this);
     objects.push_back(myButton);
 
     buttonColor = getColor(Color::WHITE);

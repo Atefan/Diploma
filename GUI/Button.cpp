@@ -11,7 +11,7 @@ void Button::render(SDL_Renderer* renderer) {
     SDL_Rect buttonRect = { x, y, width, height };
     SDL_RenderFillRect(renderer, &buttonRect);
 
-    SDL_Color textColor = { 0, 0, 0, 255 }; // Black color for text
+    SDL_Color textColor = getColor(Color::BLACK);
     SDL_Surface* textSurface = TTF_RenderText_Blended(font, text.c_str(), textColor);
     if (textSurface) {
         SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
@@ -102,16 +102,76 @@ void Button8Bit::onClick() {
     }
 }
 
-Button16Bit::Button16Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id)
-    : Button(x, y, width, height, color, available, text, font, id) {}
+Button16Bit::Button16Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id, SDLSerialVisualizer* visualizer)
+    : Button(x, y, width, height, color, available, text, font, id), myVisualizer(visualizer) {}
 
 void Button16Bit::onClick() {
+    uint8_t receivedNumber = 0;
     std::cout << "16 Bit Button clicked!" << std::endl;
+
+    const char* sendData = "0";
+    serial.writeBytes(sendData, strlen(sendData));
+
+    int dataSize = 0;
+    char* data = readData(&dataSize);
+
+    if (dataSize > 0) {
+        try {
+            receivedNumber = std::stoi(data);  // Convert to integer if response is numeric
+            std::cout << "Received integer: " << receivedNumber << std::endl;
+        }
+        catch (std::invalid_argument& e) {
+            std::cout << "Invalid data received: " << data << std::endl;
+        }
+    }
+    else {
+        std::cout << "No data received or data size is zero." << std::endl;
+    }
+
+    delete[] data;
+
+    std::vector<Obj*> objects = myVisualizer->getObjects();
+    for (Obj* obj : objects) {
+        NumberDisplay* numberDisplay = dynamic_cast<NumberDisplay*>(obj);
+        if (numberDisplay) {
+            numberDisplay->updateNumber(receivedNumber, 16);  // Update the display with the new number
+        }
+    }
 }
 
-Button32Bit::Button32Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id)
-    : Button(x, y, width, height, color, available, text, font, id) {}
+Button32Bit::Button32Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id, SDLSerialVisualizer* visualizer)
+    : Button(x, y, width, height, color, available, text, font, id), myVisualizer(visualizer) {}
 
 void Button32Bit::onClick() {
+    uint8_t receivedNumber = 0;
     std::cout << "32 Bit Button clicked!" << std::endl;
+
+    const char* sendData = "0";
+    serial.writeBytes(sendData, strlen(sendData));
+
+    int dataSize = 0;
+    char* data = readData(&dataSize);
+
+    if (dataSize > 0) {
+        try {
+            receivedNumber = std::stoi(data);  // Convert to integer if response is numeric
+            std::cout << "Received integer: " << receivedNumber << std::endl;
+        }
+        catch (std::invalid_argument& e) {
+            std::cout << "Invalid data received: " << data << std::endl;
+        }
+    }
+    else {
+        std::cout << "No data received or data size is zero." << std::endl;
+    }
+
+    delete[] data;
+
+    std::vector<Obj*> objects = myVisualizer->getObjects();
+    for (Obj* obj : objects) {
+        NumberDisplay* numberDisplay = dynamic_cast<NumberDisplay*>(obj);
+        if (numberDisplay) {
+            numberDisplay->updateNumber(receivedNumber, 32);
+        }
+    }
 }

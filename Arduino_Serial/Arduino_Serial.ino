@@ -13,8 +13,7 @@ void setup()
     digitalWrite(GREEN, HIGH);
     digitalWrite(BLUE, HIGH);    
 
-    //randomSeed(analogRead(0));
-    //long randNumber= random(1<<15 - 1);
+    randomSeed(analogRead(0));
     Serial.begin(9600);
 }
 void blink() {
@@ -74,6 +73,7 @@ void readValues(uint8_t &res)
   for(uint8_t i = 0; i < 4; i++)
   {
     read = analogRead(ANALOG);
+    read = random(1 << 10);
     read >>= 6;    
     res  |= read << (i * 2); 
   }
@@ -86,6 +86,7 @@ void readValues(uint16_t &res)
   for(uint8_t i = 0; i < 8; i++)
   {
     read = analogRead(ANALOG);
+    read = random(1 << 10);
     read >>= 6;    
     res  |= read << (i * 2); 
   }
@@ -98,6 +99,7 @@ void readValues(uint32_t &res)
   for(uint8_t i = 0; i < 16; i++)
   {
     read = analogRead(ANALOG);
+    read = random(1 << 10);
     read >>= 6;    
     res  |= read << (i * 2); 
   }
@@ -110,6 +112,7 @@ void readValues(uint64_t &res)
   for(uint8_t i = 0; i < 32; i++)
   {
     read = analogRead(ANALOG);
+    read = random(1 << 10);
     read >>= 6;    
     res  |= read << (i * 2); 
   }

@@ -49,12 +49,18 @@ private:
 
 class Button16Bit : public Button {
 public:
-    Button16Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id);
+    Button16Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id, SDLSerialVisualizer* visualizer);
     void onClick() override;
+
+private:
+    SDLSerialVisualizer* myVisualizer;
 };
 
 class Button32Bit : public Button {
 public:
-    Button32Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id);
+    Button32Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id, SDLSerialVisualizer* visualizer);
     void onClick() override;
+
+private:
+    SDLSerialVisualizer* myVisualizer;
 };
