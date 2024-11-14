@@ -1,8 +1,9 @@
 ﻿  Button.cpp
-C:\Users\GES2SF\everything\Diploma\Diploma\GUI\Button.cpp(76,39): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
-C:\Users\GES2SF\everything\Diploma\Diploma\GUI\Button.cpp(86,39): warning C4101: 'e': unreferenced local variable
-C:\Users\GES2SF\everything\Diploma\Diploma\GUI\Button.cpp(113,39): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
-C:\Users\GES2SF\everything\Diploma\Diploma\GUI\Button.cpp(123,39): warning C4101: 'e': unreferenced local variable
-C:\Users\GES2SF\everything\Diploma\Diploma\GUI\Button.cpp(150,39): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
-C:\Users\GES2SF\everything\Diploma\Diploma\GUI\Button.cpp(160,39): warning C4101: 'e': unreferenced local variable
+C:\Users\GES2SF\everything\Diploma\Diploma\GUI\Button.cpp(80,39): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
+C:\Users\GES2SF\everything\Diploma\Diploma\GUI\Button.cpp(106,39): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
+C:\Users\GES2SF\everything\Diploma\Diploma\GUI\Button.cpp(132,39): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
+C:\Users\GES2SF\everything\Diploma\Diploma\GUI\Button.cpp(184,51): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
+C:\Users\GES2SF\everything\Diploma\Diploma\GUI\Button.cpp(192,49): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
+  SDLSerialVisualizer.cpp
+  Generating Code...
   GUI.vcxproj -> C:\Users\GES2SF\everything\Diploma\Diploma\GUI\x64\Debug\GUI.exe

@@ -10,6 +10,7 @@ SDL_Color getColor(Color color) {
     case Color::YELLOW:   return { 255, 255, 0, 255 };
     case Color::CYAN:     return { 0, 255, 255, 255 };
     case Color::MAGENTA:  return { 255, 0, 255, 255 };
-    default:              return { 0, 0, 0, 255 }; // Default to black if unknown
+    case Color::GRAY:     return { 169, 169, 169, 255 };
+    default:              return { 0, 0, 0, 255 };
     }
 }

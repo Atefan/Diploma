@@ -15,6 +15,7 @@ public:
     void updateNumber(int newNumber, int newBits);
     void render(SDL_Renderer* renderer) override;
     void handleEvent(SDL_Event* event) override;
+    void process() override;
 
 private:
     void num_to_string(std::string& binaryStr, std::string& numberStr, int number);

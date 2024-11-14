@@ -74,6 +74,10 @@ void SDLSerialVisualizer::run() {
                 obj->handleEvent(&e);
         }
 
+        for (auto obj : objects) {
+            obj->process();
+        }
+
         for (auto obj : objects)
             obj->render(renderer);
 
@@ -97,7 +101,11 @@ void SDLSerialVisualizer::createButtons(TTF_Font* font) {
     objects.push_back(myButton);
 
     buttonColor = getColor(Color::BLUE);
-    myButton = new Button32Bit(600, 150, 100, 50, buttonColor, true, "32 Bit", font, BUTTON_32, this);
+    myButton = new Button32Bit(500, 150, 100, 50, buttonColor, true, "32 Bit", font, BUTTON_32, this);
+    objects.push_back(myButton);
+
+    buttonColor = getColor(Color::MAGENTA);
+    myButton = new ButtonStreamBit(650, 150, 100, 50, buttonColor, true, "32 Bit", font, 1313, this);
     objects.push_back(myButton);
 
     buttonColor = getColor(Color::WHITE);

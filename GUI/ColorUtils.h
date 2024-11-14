@@ -10,7 +10,8 @@ enum class Color {
     BLACK,
     YELLOW,
     CYAN,
-    MAGENTA
+    MAGENTA,
+    GRAY
 };
 
 SDL_Color getColor(Color color);

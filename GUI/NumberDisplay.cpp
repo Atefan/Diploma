@@ -47,6 +47,8 @@ void NumberDisplay::render(SDL_Renderer* renderer) {
 
 void NumberDisplay::handleEvent(SDL_Event* event) {}
 
+void NumberDisplay::process() {}
+
 void NumberDisplay::num_to_string(std::string& binaryStr, std::string& numberStr, int number) {
     binaryStr = "";
     for (int i = bits - 1; i >= 0; --i) {
