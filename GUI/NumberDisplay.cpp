@@ -1,7 +1,5 @@
 #include "NumberDisplay.h"
 
-#include <SDL.h>
-#include <sstream>
 
 NumberDisplay::NumberDisplay(int x, int y, int width, int height, Color color, TTF_Font* font)
     : x(x), y(y), width(width), height(height), color(getColor(color)), font(font), number(55), bits(32) {}

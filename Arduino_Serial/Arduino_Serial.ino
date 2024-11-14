@@ -29,6 +29,10 @@ void blink() {
 
 
 void loop() {
+
+  int adcValue = analogRead(ANALOG);
+  Serial.println(adcValue, DEC);
+
     if (Serial.available() > 0) {
         char msg = Serial.read();
         Serial.print(msg);

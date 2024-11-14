@@ -8,8 +8,8 @@
 
 
 #include "Obj.h"
-#include "serialib.h"
 #include "ColorUtils.h"
+#include "SDLSerialVisualizer.h"
 #include "SerialManager.h"
 
 

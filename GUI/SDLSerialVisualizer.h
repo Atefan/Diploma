@@ -5,9 +5,6 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
-#include "serialib.h"
-
-#include "SerialManager.h"
 #include "NumberDisplay.h"
 
 class SDLSerialVisualizer {

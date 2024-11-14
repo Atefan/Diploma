@@ -1,6 +1,5 @@
 #include "Button.h"
-#include "SDLSerialVisualizer.h"
-#include "ColorUtils.h"
+
 
 Button::Button(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id)
     : x(x), y(y), width(width), height(height), color(color), available(available), text(text), font(font), id(id) {}
@@ -93,7 +92,9 @@ void Button8Bit::onClick() {
     }
 
     delete[] data;
-    for (Obj* obj : myVisualizer->getObjects()) {
+
+    std::vector<Obj*> objects = myVisualizer->getObjects();
+    for (Obj* obj : objects) {
         NumberDisplay* numberDisplay = dynamic_cast<NumberDisplay*>(obj);
         if (numberDisplay) {
             numberDisplay->updateNumber(receivedNumber, 8);  // Update the display with the new number

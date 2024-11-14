@@ -11,6 +11,9 @@
 #include "Obj.h"
 #include "SDLSerialVisualizer.h"
 
+#include "SerialManager.h"
+
+serialib serial;
 
 int main(int argc, char* args[]) {
 	SDLSerialVisualizer visualizer;
