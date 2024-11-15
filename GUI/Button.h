@@ -17,7 +17,7 @@ class SDLSerialVisualizer;
 
 class Button : public Obj {
 public:
-    Button(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id);
+    Button(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font);
     virtual ~Button() {}
 
     virtual void onClick() = 0;
@@ -29,7 +29,6 @@ public:
     int readData(int dataSize);
 
 protected:
-    int id;
     int x, y;
     int width, height;
     SDL_Color color;
@@ -40,7 +39,7 @@ protected:
 
 class Button8Bit : public Button {
 public:
-    Button8Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id, SDLSerialVisualizer* visualizer);
+    Button8Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, SDLSerialVisualizer* visualizer);
     void onClick() override;
     void process() override;
 
@@ -50,7 +49,7 @@ private:
 
 class Button16Bit : public Button {
 public:
-    Button16Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id, SDLSerialVisualizer* visualizer);
+    Button16Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, SDLSerialVisualizer* visualizer);
     void onClick() override;
     void process() override;
 
@@ -60,7 +59,7 @@ private:
 
 class Button32Bit : public Button {
 public:
-    Button32Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id, SDLSerialVisualizer* visualizer);
+    Button32Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, SDLSerialVisualizer* visualizer);
     void onClick() override;
     void process() override;
 
@@ -70,10 +69,13 @@ private:
 
 class ButtonStreamBit : public Button {
 public:
-    ButtonStreamBit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id, SDLSerialVisualizer* visualizer);
+    ButtonStreamBit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, SDLSerialVisualizer* visualizer);
     void onClick() override;
     void process() override;
+    ~ButtonStreamBit() override;
 
 private:
+    uint32_t* buffer;
+    int index, currentSize, bufferSize, bufferIndex;
     SDLSerialVisualizer* myVisualizer;
 };

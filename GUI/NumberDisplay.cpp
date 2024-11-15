@@ -4,7 +4,7 @@
 NumberDisplay::NumberDisplay(int x, int y, int width, int height, Color color, TTF_Font* font)
     : x(x), y(y), width(width), height(height), color(getColor(color)), font(font), number(55), bits(32) {}
 
-void NumberDisplay::updateNumber(int newNumber, int newBits) {
+void NumberDisplay::updateNumber(uint32_t newNumber, int newBits) {
     number = newNumber;
     bits = newBits;
 }
@@ -49,7 +49,7 @@ void NumberDisplay::handleEvent(SDL_Event* event) {}
 
 void NumberDisplay::process() {}
 
-void NumberDisplay::num_to_string(std::string& binaryStr, std::string& numberStr, int number) {
+void NumberDisplay::num_to_string(std::string& binaryStr, std::string& numberStr, uint32_t number) {
     binaryStr = "";
     for (int i = bits - 1; i >= 0; --i) {
         if ((i + 1) % 4 == 0)

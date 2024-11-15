@@ -1,8 +1,8 @@
 #include "Button.h"
 
 
-Button::Button(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id)
-    : x(x), y(y), width(width), height(height), color(color), active(available), text(text), font(font), id(id) {}
+Button::Button(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font)
+    : x(x), y(y), width(width), height(height), color(color), active(available), text(text), font(font) {}
 
 void Button::render(SDL_Renderer* renderer) {
 
@@ -39,7 +39,6 @@ void Button::handleEvent(SDL_Event* event) {
 }
 
 
-
 void Button::setColor(SDL_Color newColor) {
     color = newColor;
 }
@@ -69,8 +68,8 @@ int Button::readData(int dataSize) {
     return result;
 }
 
-Button8Bit::Button8Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id, SDLSerialVisualizer* visualizer)
-    : Button(x, y, width, height, color, available, text, font, id), myVisualizer(visualizer) {}
+Button8Bit::Button8Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font,  SDLSerialVisualizer* visualizer)
+    : Button(x, y, width, height, color, available, text, font), myVisualizer(visualizer) {}
 
 void Button8Bit::onClick() {
     uint8_t receivedNumber = 0;
@@ -87,7 +86,7 @@ void Button8Bit::onClick() {
     for (Obj* obj : objects) {
         NumberDisplay* numberDisplay = dynamic_cast<NumberDisplay*>(obj);
         if (numberDisplay) {
-            numberDisplay->updateNumber(receivedNumber, 8);  // Update the display with the new number
+            numberDisplay->updateNumber(receivedNumber, 8);
         }
     }
 }
@@ -95,14 +94,14 @@ void Button8Bit::onClick() {
 void Button8Bit::process() {}
 
 
-Button16Bit::Button16Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id, SDLSerialVisualizer* visualizer)
-    : Button(x, y, width, height, color, available, text, font, id), myVisualizer(visualizer) {}
+Button16Bit::Button16Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, SDLSerialVisualizer* visualizer)
+    : Button(x, y, width, height, color, available, text, font), myVisualizer(visualizer) {}
 
 void Button16Bit::onClick() {
     uint16_t receivedNumber = 0;
     std::cout << "16 Bit Button clicked!" << std::endl;
 
-    const char* sendData = "0";
+    const char* sendData = "1";
     serial.writeBytes(sendData, strlen(sendData));
 
     int dataSize = 16;
@@ -113,7 +112,7 @@ void Button16Bit::onClick() {
     for (Obj* obj : objects) {
         NumberDisplay* numberDisplay = dynamic_cast<NumberDisplay*>(obj);
         if (numberDisplay) {
-            numberDisplay->updateNumber(receivedNumber, 16);  // Update the display with the new number
+            numberDisplay->updateNumber(receivedNumber, 16);
         }
     }
 }
@@ -121,14 +120,14 @@ void Button16Bit::onClick() {
 void Button16Bit::process() {}
 
 
-Button32Bit::Button32Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id, SDLSerialVisualizer* visualizer)
-    : Button(x, y, width, height, color, available, text, font, id), myVisualizer(visualizer) {}
+Button32Bit::Button32Bit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, SDLSerialVisualizer* visualizer)
+    : Button(x, y, width, height, color, available, text, font), myVisualizer(visualizer) {}
 
 void Button32Bit::onClick() {
     uint32_t receivedNumber = 0;
     std::cout << "32 Bit Button clicked!" << std::endl;
 
-    const char* sendData = "0";
+    const char* sendData = "3";
     serial.writeBytes(sendData, strlen(sendData));
 
     int dataSize = 32;
@@ -146,27 +145,30 @@ void Button32Bit::onClick() {
 void Button32Bit::process() {}
 
 
-ButtonStreamBit::ButtonStreamBit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, int id, SDLSerialVisualizer* visualizer)
-    : Button(x, y, width, height, color, available, text, font, id), myVisualizer(visualizer) {}
+ButtonStreamBit::ButtonStreamBit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, SDLSerialVisualizer* visualizer)
+    : Button(x, y, width, height, color, available, text, font),
+    myVisualizer(visualizer), bufferIndex(0), currentSize(0), bufferSize(64) {
+    buffer = new uint32_t[bufferSize];
+}
+
+
+ButtonStreamBit::~ButtonStreamBit() {
+    delete[] buffer;
+}
 
 void ButtonStreamBit::process() {
-    const int ARRAY_SIZE = 1 << 10;
-    static int bufferSize = 64;
-    static int buffer[ARRAY_SIZE];
-    static int bufferIndex = 0;
-    static bool bufferInitialized = false;
-
     if (!active) return;
 
-    if (!bufferInitialized || bufferIndex >= bufferSize) {
-        bufferSize = serial.readBytes(buffer, ARRAY_SIZE, 1000);
-
+    if (bufferIndex >= currentSize) {
+        currentSize = serial.readBytes(reinterpret_cast<char*>(buffer), bufferSize * sizeof(int), 1000);
         bufferIndex = 0;
-        bufferInitialized = true;
+
+        if (currentSize <= 0) return;
+
+        currentSize /= sizeof(int);
     }
 
-    int nextValue = buffer[bufferIndex++];
-    std::cout << "Next value from buffer: " << nextValue << std::endl;
+    uint32_t nextValue = buffer[bufferIndex++];
 
     std::vector<Obj*> objects = myVisualizer->getObjects();
     for (Obj* obj : objects) {
@@ -177,21 +179,18 @@ void ButtonStreamBit::process() {
     }
 }
 
+
 void ButtonStreamBit::onClick() {
     if (active) {
-
         const char* deactivateSignal = "8";
-        serial.writeBytes(deactivateSignal, strlen(deactivateSignal)); // Send "8" to serial
-
+        serial.writeBytes(deactivateSignal, strlen(deactivateSignal));
         active = false;
-        setColor(getColor(Color::GRAY)); // Set color to gray for inactive state
+        setColor(getColor(Color::GRAY3));
     }
     else {
-        // Activate if currently inactive
         const char* activateSignal = "4";
-        serial.writeBytes(activateSignal, strlen(activateSignal)); // Send "4" to serial
-
+        serial.writeBytes(activateSignal, strlen(activateSignal));
         active = true;
-        setColor(getColor(Color::MAGENTA)); // Set color to magenta for active state
+        setColor(getColor(Color::GRAY6));
     }
 }

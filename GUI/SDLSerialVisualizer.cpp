@@ -82,6 +82,7 @@ void SDLSerialVisualizer::run() {
             obj->render(renderer);
 
         SDL_RenderPresent(renderer);
+        SDL_Delay(70);
     }
 }
 
@@ -90,25 +91,36 @@ std::vector<Obj*> SDLSerialVisualizer::getObjects() {
 }
 
 void SDLSerialVisualizer::createButtons(TTF_Font* font) {
+
+    int buttonStartX = (SCREEN_WIDTH / 2 - (BUTTON_SPACING * 1.5 + BUTTON_WIDTH * 2));
+
+
     Button* myButton = nullptr;
-    SDL_Color buttonColor = getColor(Color::RED);
+    SDL_Color buttonColor = getColor(Color::GRAY4);
 
-    myButton = new Button8Bit(200, 150, 100, 50, buttonColor, true, "8 Bit", font, BUTTON_8, this);
+    myButton = new Button8Bit(buttonStartX, BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT, buttonColor, true, "8 Bit", font, this);
     objects.push_back(myButton);
 
-    buttonColor = getColor(Color::GREEN);
-    myButton = new Button16Bit(350, 150, 100, 50, buttonColor, true, "16 Bit", font, BUTTON_16, this);
+    buttonColor = getColor(Color::GRAY4);
+    myButton = new Button16Bit(buttonStartX + BUTTON_WIDTH + BUTTON_SPACING, BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT, buttonColor, true, "16 Bit", font, this);
     objects.push_back(myButton);
 
-    buttonColor = getColor(Color::BLUE);
-    myButton = new Button32Bit(500, 150, 100, 50, buttonColor, true, "32 Bit", font, BUTTON_32, this);
+    buttonColor = getColor(Color::GRAY4);
+    myButton = new Button32Bit(buttonStartX + 2 * (BUTTON_WIDTH + BUTTON_SPACING), BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT, buttonColor, true, "32 Bit", font, this);
     objects.push_back(myButton);
 
-    buttonColor = getColor(Color::MAGENTA);
-    myButton = new ButtonStreamBit(650, 150, 100, 50, buttonColor, true, "32 Bit", font, 1313, this);
+    buttonColor = getColor(Color::GRAY3);
+    myButton = new ButtonStreamBit(buttonStartX + 3 * (BUTTON_WIDTH + BUTTON_SPACING), BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT, buttonColor, false, "Stream", font, this);
     objects.push_back(myButton);
 
     buttonColor = getColor(Color::WHITE);
-    NumberDisplay* myNumberDisplay = new NumberDisplay(100, 400, 700, 300, Color::WHITE, font);
+    NumberDisplay* myNumberDisplay = new NumberDisplay(
+        (SCREEN_WIDTH - DISPLAY_WIDTH) / 2,
+        DISPLAY_Y,                           
+        DISPLAY_WIDTH,
+        DISPLAY_HEIGHT,
+        Color::WHITE,
+        font
+    );
     objects.push_back(myNumberDisplay);
 }

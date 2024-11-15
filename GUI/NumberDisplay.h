@@ -12,18 +12,18 @@
 class NumberDisplay : public Obj {
 public:
     NumberDisplay(int x, int y, int width, int height, Color color, TTF_Font* font);
-    void updateNumber(int newNumber, int newBits);
+    void updateNumber(uint32_t newNumber, int newBits);
     void render(SDL_Renderer* renderer) override;
     void handleEvent(SDL_Event* event) override;
     void process() override;
 
 private:
-    void num_to_string(std::string& binaryStr, std::string& numberStr, int number);
+    void num_to_string(std::string& binaryStr, std::string& numberStr, uint32_t number);
 
     int x, y;
     int width, height;
     SDL_Color color;
     TTF_Font* font;
-    int number;
+    uint32_t number;
     int bits;
 };
