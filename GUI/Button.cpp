@@ -194,3 +194,56 @@ void ButtonStreamBit::onClick() {
         setColor(getColor(Color::GRAY6));
     }
 }
+
+
+
+ButtonFile::ButtonFile(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, SDLSerialVisualizer* visualizer)
+    : Button(x, y, width, height, color, available, text, font),
+    myVisualizer(visualizer)
+{
+    file.open("serial_data.txt", std::ios::out | std::ios::trunc);
+    if (!file.is_open()) {
+        std::cerr << "Failed to open file for writing!" << std::endl;
+    }
+}
+
+ButtonFile::~ButtonFile() {
+    if (file.is_open()) 
+        file.close();
+}
+
+void ButtonFile::process() {
+    if (!active || !file.is_open()) return;
+
+    const int ARRAY_SIZE = sizeof(uint16_t);
+    uint16_t value;
+    char buffer[ARRAY_SIZE];
+
+    int bytesRead = serial.readBytes(buffer, ARRAY_SIZE, 1000);
+    if (bytesRead == ARRAY_SIZE) {
+        memcpy(&value, buffer, ARRAY_SIZE);
+
+        file << value << std::endl;
+        std::cout << "Value written to file: " << value << std::endl;
+
+        std::vector<Obj*> objects = myVisualizer->getObjects();
+        for (Obj* obj : objects) {
+            NumberDisplay* numberDisplay = dynamic_cast<NumberDisplay*>(obj);
+            if (numberDisplay) {
+                numberDisplay->updateNumber(value, 32);
+            }
+        }
+    }
+}
+
+
+void ButtonFile::onClick() {
+
+    const char* Signal = "5";
+    serial.writeBytes(Signal, strlen(Signal));
+    active = !active;
+    if (active)
+        setColor(getColor(Color::GRAY3));
+    else
+        setColor(getColor(Color::GRAY6));
+}

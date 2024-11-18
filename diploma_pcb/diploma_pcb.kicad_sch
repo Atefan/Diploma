@@ -4402,7 +4402,7 @@
 			(uuid "79e4b4a3-edd5-4923-b1ea-046ba048a030")
 		)
 		(instances
-			(project ""
+			(project "diploma_pcb"
 				(path "/8eade999-89f4-4618-aeea-e9238b0bd165"
 					(reference "LED1")
 					(unit 1)
@@ -4990,7 +4990,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "2SC3356:SOT-23_MINIMOLD_REN"
+		(property "Footprint" "2SC3356:SOT-23_MINIMOLD_REN-M"
 			(at 48.895 62.865 0)
 			(effects
 				(font
@@ -5402,7 +5402,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "2SC3356:SOT-23_MINIMOLD_REN"
+		(property "Footprint" "2SC3356:SOT-23_MINIMOLD_REN-M"
 			(at 48.895 62.865 0)
 			(effects
 				(font

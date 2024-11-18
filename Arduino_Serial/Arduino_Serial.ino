@@ -4,6 +4,7 @@
 #define ANALOG A0
 
 bool streaming = false;
+bool raw_streaming = false;
 
 void setup() {
     pinMode(LED_BUILTIN, OUTPUT);
@@ -54,10 +55,13 @@ void loop() {
                 readValues(res4);
                 Serial.write((uint8_t*)&res4, sizeof(res4));
                 break;
+            case '5':
+                raw_streaming = !raw_streaming;
+                break;
             case '4':
                 streaming = true;
                 break;
-            case '8':  // Stop streaming
+            case '8':
                 streaming = false;
                 break;
             default:
@@ -67,6 +71,12 @@ void loop() {
         }
         blink();  // Indicate command received
     }
+
+    if (raw_streaming) {
+        uint16_t _16bit_value = analogRead(ANALOG);
+        Serial.write(reinterpret_cast<const uint8_t*>(&_16bit_value), sizeof(_16bit_value));
+    }
+
 
     if (streaming) {
         uint8_t a;

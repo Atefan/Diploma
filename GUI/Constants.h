@@ -1,7 +1,7 @@
 #pragma once
 
 
-#define COM "COM7"
+#define COM "COM4"
 
 #define SCREEN_WIDTH 1200
 #define SCREEN_HEIGHT 800

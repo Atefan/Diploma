@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 #include <bitset>
-
+#include <fstream>
 
 #include "Obj.h"
 #include "ColorUtils.h"
@@ -77,5 +77,18 @@ public:
 private:
     uint32_t* buffer;
     int index, currentSize, bufferSize, bufferIndex;
+    SDLSerialVisualizer* myVisualizer;
+};
+
+
+class ButtonFile : public Button {
+public:
+    ButtonFile(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, SDLSerialVisualizer* visualizer);
+    void onClick() override;
+    void process() override;
+    ~ButtonFile() override;
+
+private:
+    std::ofstream file;
     SDLSerialVisualizer* myVisualizer;
 };

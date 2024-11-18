@@ -92,7 +92,7 @@ std::vector<Obj*> SDLSerialVisualizer::getObjects() {
 
 void SDLSerialVisualizer::createButtons(TTF_Font* font) {
 
-    int buttonStartX = (SCREEN_WIDTH / 2 - (BUTTON_SPACING * 1.5 + BUTTON_WIDTH * 2));
+    int buttonStartX = (SCREEN_WIDTH / 2 - (BUTTON_SPACING * 2 + BUTTON_WIDTH * 2.5));
 
 
     Button* myButton = nullptr;
@@ -111,6 +111,10 @@ void SDLSerialVisualizer::createButtons(TTF_Font* font) {
 
     buttonColor = getColor(Color::GRAY3);
     myButton = new ButtonStreamBit(buttonStartX + 3 * (BUTTON_WIDTH + BUTTON_SPACING), BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT, buttonColor, false, "Stream", font, this);
+    objects.push_back(myButton);
+
+    buttonColor = getColor(Color::GRAY3);
+    myButton = new ButtonFile(buttonStartX + 4 * (BUTTON_WIDTH + BUTTON_SPACING), BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT, buttonColor, false, "File", font, this);
     objects.push_back(myButton);
 
     buttonColor = getColor(Color::WHITE);

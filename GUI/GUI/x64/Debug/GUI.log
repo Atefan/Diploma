@@ -1,7 +1,8 @@
 ﻿  Button.cpp
-C:\Users\GES2SF\everything\Diploma\Diploma\GUI\Button.cpp(79,39): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
-C:\Users\GES2SF\everything\Diploma\Diploma\GUI\Button.cpp(105,39): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
-C:\Users\GES2SF\everything\Diploma\Diploma\GUI\Button.cpp(131,39): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
-C:\Users\GES2SF\everything\Diploma\Diploma\GUI\Button.cpp(186,51): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
-C:\Users\GES2SF\everything\Diploma\Diploma\GUI\Button.cpp(192,49): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
-  GUI.vcxproj -> C:\Users\GES2SF\everything\Diploma\Diploma\GUI\x64\Debug\GUI.exe
+C:\Users\stefa\source\Diploma_git\Diploma\GUI\Button.cpp(79,39): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
+C:\Users\stefa\source\Diploma_git\Diploma\GUI\Button.cpp(105,39): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
+C:\Users\stefa\source\Diploma_git\Diploma\GUI\Button.cpp(131,39): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
+C:\Users\stefa\source\Diploma_git\Diploma\GUI\Button.cpp(186,51): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
+C:\Users\stefa\source\Diploma_git\Diploma\GUI\Button.cpp(192,49): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
+C:\Users\stefa\source\Diploma_git\Diploma\GUI\Button.cpp(243,37): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
+  GUI.vcxproj -> C:\Users\stefa\source\Diploma_git\Diploma\GUI\x64\Debug\GUI.exe
