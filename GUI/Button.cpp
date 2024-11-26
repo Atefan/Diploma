@@ -217,11 +217,9 @@ void ButtonFile::process() {
 
     const int ARRAY_SIZE = sizeof(uint16_t);
     uint16_t value;
-    char buffer[ARRAY_SIZE];
 
-    int bytesRead = serial.readBytes(buffer, ARRAY_SIZE, 1000);
+    int bytesRead = serial.readBytes(&value, ARRAY_SIZE, 1000);
     if (bytesRead == ARRAY_SIZE) {
-        memcpy(&value, buffer, ARRAY_SIZE);
 
         file << value << std::endl;
         std::cout << "Value written to file: " << value << std::endl;
