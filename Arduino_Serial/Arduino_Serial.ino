@@ -5,8 +5,35 @@
 
 bool streaming = false;
 bool raw_streaming = false;
+void setup_PWM()
+{
+  noInterrupts();
+  DDRD |= (1 << PD3); // set D3 to output
+
+  TCNT2 = 0;
+  TCCR2A = 0;
+  TCCR2A = 0;
+  TIFR2 = 0;
+  TIMSK2 = 0;
+  
+  TCCR2A |= (1 << COM2B1); // set to reset on top
+  
+  TCCR2A |= (1 << WGM21) | (1 << WGM20); // Fast PWM OCRA BOTTOM TOP
+  TCCR2B |= (1 << WGM22);
+
+   
+  TCCR2B |= (1 << CS20) ; // set to 32 times prescale
+
+  OCR2A = 49;
+  OCR2B = 24; // set max and interupt time
+
+  //1.25 kHz
+  interrupts();
+}
 
 void setup() {
+    setup_PWM();
+  
     pinMode(LED_BUILTIN, OUTPUT);
     pinMode(RED, OUTPUT);
     pinMode(GREEN, OUTPUT);

@@ -4626,7 +4626,7 @@
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor handsolder")
 		(property "Reference" "C2"
-			(at 0 -1.85 360)
+			(at 0 -1.85 0)
 			(layer "F.SilkS")
 			(uuid "05458a4e-f89c-46c4-891a-e7762fb013a5")
 			(effects
@@ -4637,7 +4637,7 @@
 			)
 		)
 		(property "Value" ".1uF"
-			(at 0 1.85 360)
+			(at 0 1.85 0)
 			(layer "F.Fab")
 			(uuid "231cfaea-7f7e-4c9b-984f-04902b76a675")
 			(effects
@@ -4792,7 +4792,7 @@
 			(uuid "3ec16b34-3b91-462e-820a-36fe3e74e8fe")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(uuid "17aeebff-0896-4c6f-8c3a-5352457eba10")
 			(effects
