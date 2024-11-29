@@ -76,6 +76,7 @@ public:
 
 private:
     uint32_t* buffer;
+    std::ofstream binary_file;
     int index, currentSize, bufferSize, bufferIndex;
     SDLSerialVisualizer* myVisualizer;
 };

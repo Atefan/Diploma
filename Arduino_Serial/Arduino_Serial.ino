@@ -5,6 +5,14 @@
 
 bool streaming = false;
 bool raw_streaming = false;
+
+union Result {
+    uint8_t res8;
+    uint16_t res16;
+    uint32_t res32;
+    uint64_t res64;
+};
+
 void setup_PWM()
 {
   noInterrupts();
@@ -60,27 +68,24 @@ void loop() {
     if (Serial.available() > 0) {
         char msg = Serial.read();
 
-        uint8_t res1 = 101;
-        uint16_t res2 = 101;
-        uint32_t res3 = 101;
-        uint64_t res4 = 101;
+        Result result;
 
         switch (msg) {
             case '0':
-                readValues(res1);
-                Serial.write((uint8_t*)&res1, sizeof(res1));
+                readValues(result, 8);
+                Serial.write((uint8_t*)&result, 1);
                 break;
             case '1':
-                readValues(res2);
-                Serial.write((uint8_t*)&res2, sizeof(res2));
+                readValues(result, 16);
+                Serial.write((uint8_t*)&result, 2);
                 break;
             case '2':
-                readValues(res3);
-                Serial.write((uint8_t*)&res3, sizeof(res3));
+                readValues(result, 32);
+                Serial.write((uint8_t*)&result, 4);
                 break;
             case '3':
-                readValues(res4);
-                Serial.write((uint8_t*)&res4, sizeof(res4));
+                readValues(result, 64);
+                Serial.write((uint8_t*)&result, 8);
                 break;
             case '5':
                 raw_streaming = !raw_streaming;
@@ -92,7 +97,7 @@ void loop() {
                 streaming = false;
                 break;
             default:
-                blink();  // Blink LED for unrecognized commands
+                blink();
                 blink();
                 blink();
         }
@@ -106,61 +111,28 @@ void loop() {
 
 
     if (streaming) {
-        uint8_t a;
-        uint8_t arr[32];
-        
-        for(int i = 0 ; i < 32; i++)
-        {
-          readValues(a);
-          arr[i] = a;
-        }
+      uint8_t arr[32];
+  
+      for (int i = 0; i < 32; i++) {
+          Result result;
+          readValues(result, 8);
+          arr[i] = result.res8;
+      }
+  
+      Serial.write(arr, 32);
+      blink();
+  }
 
-        Serial.write(arr,32);
-        blink();
-        delay(100);
-    }
 }
+void readValues(Result &result, uint8_t bitSize) {
+    uint8_t byteSize = bitSize / 8;
 
-void readValues(uint8_t &res) {
-    res = 0;
-    int read = 0;
-    for (uint8_t i = 0; i < 4; i++) {
-        read = analogRead(ANALOG);
-        read = random(1 << 10);
-        read >>= 6;    
-        res  |= read << (i * 2); 
-    }
-}
+    result.res64 = 0;
 
-void readValues(uint16_t &res) {
-    res = 0;
-    int read = 0;
-    for (uint8_t i = 0; i < 8; i++) {
-        read = analogRead(ANALOG);
-        read = random(1 << 10);
-        read >>= 6;    
-        res  |= read << (i * 2); 
-    }
-}
+    for (uint8_t i = 0; i < byteSize * 2; i++) {
+        int read = analogRead(ANALOG);
+        uint8_t nibble = read & 0xF;
 
-void readValues(uint32_t &res) {
-    res = 0;
-    int read = 0;
-    for (uint8_t i = 0; i < 16; i++) {
-        read = analogRead(ANALOG);
-        read = random(1 << 10);
-        read >>= 6;    
-        res  |= read << (i * 2); 
-    }
-}
-
-void readValues(uint64_t &res) {
-    res = 0;
-    int read = 0;
-    for (uint8_t i = 0; i < 32; i++) {
-        read = analogRead(ANALOG);
-        read = random(1 << 10);
-        read >>= 6;    
-        res  |= read << (i * 2); 
+        result.res64 |= (static_cast<uint64_t>(nibble) << (i * 4));
     }
 }
