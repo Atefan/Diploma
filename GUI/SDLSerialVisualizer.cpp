@@ -54,7 +54,7 @@ bool SDLSerialVisualizer::setup() {
 
     createButtons(font);
 
-    if (serial.openDevice(port, 9600) != 1) {
+    if (serial.openDevice(port, 115200) != 1) {
         std::cout << "Error opening port\n";
         return false;
     }
@@ -82,7 +82,7 @@ void SDLSerialVisualizer::run() {
             obj->render(renderer);
 
         SDL_RenderPresent(renderer);
-        SDL_Delay(70);
+        SDL_Delay(5);
     }
 }
 

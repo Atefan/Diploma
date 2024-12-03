@@ -15,7 +15,7 @@ def plot_histogram(file_path):
         plt.bar(labels, counts, color='skyblue', edgecolor='black')
         plt.xlabel('Values')
         plt.ylabel('Frequency')
-        plt.title('Histogram of Value Frequencies')
+        plt.title(f"Histogram of Freq Ratios (Total bytes: {counts})")
         
         if len(labels) > 20:
             plt.xticks(ticks=range(0, len(labels), len(labels) // 20), labels=[labels[i] for i in range(0, len(labels), len(labels) // 20)], rotation=45, ha='right')

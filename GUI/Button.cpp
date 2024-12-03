@@ -147,7 +147,7 @@ void Button32Bit::process() {}
 
 ButtonStreamBit::ButtonStreamBit(int x, int y, int width, int height, SDL_Color color, bool available, std::string text, TTF_Font* font, SDLSerialVisualizer* visualizer)
     : Button(x, y, width, height, color, available, text, font),
-    myVisualizer(visualizer), bufferIndex(0), currentSize(0), bufferSize(64) {
+    myVisualizer(visualizer), bufferIndex(0), currentSize(0), bufferSize(256) {
     buffer = new uint32_t[bufferSize];
     binary_file.open("bit_data", std::ios::out | std::ios::trunc);
     if (!binary_file.is_open()) {
@@ -171,7 +171,7 @@ void ButtonStreamBit::process() {
 
         if (currentSize <= 0) return;
 
-        currentSize /= sizeof(int);
+        currentSize /= sizeof(uint32_t);
     }
 
     uint32_t nextValue = buffer[bufferIndex++];

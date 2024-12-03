@@ -50,9 +50,7 @@ void setup() {
     digitalWrite(RED, HIGH);
     digitalWrite(GREEN, HIGH);
     digitalWrite(BLUE, HIGH);    
-
-    randomSeed(analogRead(0));
-    Serial.begin(9600);
+    Serial.begin(115200);
 }
 
 void blink() {
@@ -101,7 +99,6 @@ void loop() {
                 blink();
                 blink();
         }
-        blink();  // Indicate command received
     }
 
     if (raw_streaming) {
@@ -109,19 +106,17 @@ void loop() {
         Serial.write(reinterpret_cast<const uint8_t*>(&_16bit_value), sizeof(_16bit_value));
     }
 
-
     if (streaming) {
-      uint8_t arr[32];
+      uint8_t arr[1<<9]; //512 B
   
-      for (int i = 0; i < 32; i++) {
+      for (int i = 0; i < 64; i++) {
           Result result;
           readValues(result, 8);
           arr[i] = result.res8;
       }
   
-      Serial.write(arr, 32);
-      blink();
-  }
+      Serial.write(arr, 1<<9);
+    }
 
 }
 void readValues(Result &result, uint8_t bitSize) {
@@ -131,8 +126,8 @@ void readValues(Result &result, uint8_t bitSize) {
 
     for (uint8_t i = 0; i < byteSize * 2; i++) {
         int read = analogRead(ANALOG);
-        uint8_t nibble = read & 0xF;
+        uint8_t nibble = (read >> 0) & 0xF;
 
-        result.res64 |= (static_cast<uint64_t>(nibble) << (i * 4));
+        result.res64 |= ((uint64_t)(nibble) << (i * 4));
     }
 }
