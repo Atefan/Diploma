@@ -124,10 +124,10 @@ void readValues(Result &result, uint8_t bitSize) {
 
     result.res64 = 0;
 
-    for (uint8_t i = 0; i < byteSize * 2; i++) {
+    for (uint8_t i = 0; i < byteSize; i++) {
         int read = analogRead(ANALOG);
-        uint8_t nibble = (read >> 0) & 0xF;
+        uint8_t nibble = (read >> 1) & 0xFF;
 
-        result.res64 |= ((uint64_t)(nibble) << (i * 4));
+        result.res64 |= ((uint64_t)(nibble) << (i * 8));
     }
 }

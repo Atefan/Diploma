@@ -3,7 +3,6 @@ import numpy as np
 
 def process_binary_file(file_path):
     try:
-        # Read the binary file
         with open(file_path, "rb") as f:
             data = f.read()
 
@@ -11,16 +10,13 @@ def process_binary_file(file_path):
             print("The file is empty.")
             return
 
-        # Count occurrences of each byte value (0-255)
         byte_values, counts = np.unique(np.frombuffer(data, dtype=np.uint8), return_counts=True)
 
-        # Create a full histogram with 256 bins (include empty values for missing bytes)
         full_counts = np.zeros(256, dtype=int)
         full_counts[byte_values] = counts
 
-        # Plot the histogram
         plt.bar(range(256), full_counts, color='blue', alpha=0.7, width=1.0)
-        plt.xticks(range(0, 256, 16), [f"{i}" for i in range(0, 256, 16)])  # Label every 16th bin for readability
+        plt.xticks(range(0, 256, 16), [f"{i}" for i in range(0, 256, 16)])
         plt.xlabel("Byte Value (0-255)")
         plt.ylabel("Frequency")
         plt.title(f"Histogram of Byte Values (Total bytes: {len(data)})")
