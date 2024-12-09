@@ -4,13 +4,11 @@
 #include <linux/usb.h>
 #include <linux/slab.h>
 #include <linux/poll.h>
+#include <linux/random.h>
 
-#include "main.h"
-
+#define MODULE_NAME		"StefanModuleName"
 #define USB_VENDOR_ID		0x1a86
 #define USB_PRODUCT_ID		0x7523
-
-#define to_skel_dev(d)	container_of(d, struct usb_skel, kref)
 
 #define USB_SKEL_MINOR_BASE	192
 
@@ -196,29 +194,14 @@ error:
 	return retval;
 }
 
-unsigned int skel_poll(struct file *filp, poll_table *wait)
-{
-	unsigned int mask = 0;
-	struct usb_skel *dev = filp->private_data;
-
-	poll_wait(filp, &dev->wq, wait);
-	if (atomic_dec_and_test(&dev->can_rd)) {
-		pr_debug("Now fd can be read\n");
-		mask |= POLLIN | POLLRDNORM;
-	}
-
-	return mask;
-}
-
 static struct file_operations skel_fops = {
 	.owner =	THIS_MODULE,
 	.read =		skel_read,
 	.write =	skel_write,
-	.poll =		skel_poll,
 	.open =		skel_open,
 	.release =	skel_release,
 };
-
+ar
 static struct usb_class_driver skel_class = {
 	.name	= "usb/skel%d",
 	.fops	= &skel_fops,
