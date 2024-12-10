@@ -3,7 +3,7 @@
 #define BLUE 10 
 #define ANALOG A0
 
-bool streaming = false;
+bool streaming = true;
 bool raw_streaming = false;
 
 union Result {

@@ -7,3 +7,10 @@ https://synthnerd.wordpress.com/2020/03/09/synth-diy-a-white-noise-generator/ - 
 https://github.com/terrillmoore/NIST-Statistical-Test-Suite - NIST tests
 https://github.com/DecaturMakers/CH340_drivers-Linux-Mac-Windows/blob/master/drivers/linux/ch34x.c#L1078 - CH340 Driver
 https://github.com/torvalds/linux/blob/master/include/linux/usb.h - USB device
+
+Daemon stuff😈:
+	daemon skel - https://github.com/pasce/daemon-skeleton-linux-c/blob/master/daemonize.c
+	daemon tutor - https://www.freedesktop.org/software/systemd/man/latest/daemon.html
+
+WSL 
+	usbipd - https://learn.microsoft.com/en-us/windows/wsl/connect-usb

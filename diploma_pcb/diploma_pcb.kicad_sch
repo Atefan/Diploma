@@ -1691,7 +1691,7 @@
 				)
 			)
 		)
-		(symbol "Transistor_BJT:BC107"
+		(symbol "Transistor_BJT:MMBTA44"
 			(pin_names
 				(offset 0) hide)
 			(exclude_from_sim no)
@@ -1706,7 +1706,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "BC107"
+			(property "Value" "MMBTA44"
 				(at 5.08 0 0)
 				(effects
 					(font
@@ -1715,7 +1715,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" "Package_TO_SOT_THT:TO-18-3"
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
 				(at 5.08 -1.905 0)
 				(effects
 					(font
@@ -1726,7 +1726,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "http://www.b-kainka.de/Daten/Transistor/BC108.pdf"
+			(property "Datasheet" "https://diotec.com/request/datasheet/mmbta42.pdf"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1736,7 +1736,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "0.1A Ic, 50V Vce, Low Noise General Purpose NPN Transistor, TO-18"
+			(property "Description" "0.3A Ic, 400V Vce, NPN High Voltage Transistor, SOT-23"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1745,7 +1745,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "NPN low noise transistor"
+			(property "ki_keywords" "SMD"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1754,7 +1754,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "TO?18*"
+			(property "ki_fp_filters" "SOT?23*"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1763,7 +1763,19 @@
 					(hide yes)
 				)
 			)
-			(symbol "BC107_0_1"
+			(symbol "MMBTA44_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0.635 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
 				(polyline
 					(pts
 						(xy 0.635 0.635) (xy 2.54 2.54)
@@ -1824,11 +1836,11 @@
 					)
 				)
 			)
-			(symbol "BC107_1_1"
-				(pin passive line
-					(at 2.54 -5.08 90)
-					(length 2.54)
-					(name "E"
+			(symbol "MMBTA44_1_1"
+				(pin input line
+					(at -5.08 0 0)
+					(length 5.08)
+					(name "B"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1843,10 +1855,10 @@
 						)
 					)
 				)
-				(pin input line
-					(at -5.08 0 0)
-					(length 5.715)
-					(name "B"
+				(pin passive line
+					(at 2.54 -5.08 90)
+					(length 2.54)
+					(name "E"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2129,8 +2141,8 @@
 		(uuid "669b95fd-5702-4a8d-a2dc-657bde463a3b")
 	)
 	(no_connect
-		(at 153.67 36.83)
-		(uuid "72dbd397-32fc-4e2c-bd80-080197bf9145")
+		(at 153.67 59.69)
+		(uuid "6c524361-428c-487c-ad04-76d4d3f8e7e3")
 	)
 	(no_connect
 		(at 179.07 31.75)
@@ -2221,16 +2233,6 @@
 			(type default)
 		)
 		(uuid "0fe66edb-c07c-4aaf-adf5-8a93f76299d0")
-	)
-	(wire
-		(pts
-			(xy 38.1 60.96) (xy 38.1 63.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "10f6e51a-3b4c-450b-8a3b-7c5ae1989ada")
 	)
 	(wire
 		(pts
@@ -2392,6 +2394,16 @@
 	)
 	(wire
 		(pts
+			(xy 124.46 36.83) (xy 153.67 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "37c6202b-9e54-4071-a379-99cc6f345eb3")
+	)
+	(wire
+		(pts
 			(xy 69.85 52.705) (xy 81.28 52.705)
 		)
 		(stroke
@@ -2431,16 +2443,6 @@
 			(type default)
 		)
 		(uuid "4df4b76c-b564-4d6a-af29-42ba608f7a11")
-	)
-	(wire
-		(pts
-			(xy 129.54 59.69) (xy 153.67 59.69)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4ee75bcd-9bb6-470c-875e-08a169d4be06")
 	)
 	(wire
 		(pts
@@ -2487,7 +2489,7 @@
 	)
 	(wire
 		(pts
-			(xy 129.54 81.28) (xy 21.59 81.28)
+			(xy 124.46 81.28) (xy 21.59 81.28)
 		)
 		(stroke
 			(width 0)
@@ -2915,7 +2917,7 @@
 	)
 	(wire
 		(pts
-			(xy 129.54 59.69) (xy 129.54 81.28)
+			(xy 124.46 36.83) (xy 124.46 81.28)
 		)
 		(stroke
 			(width 0)
@@ -3330,7 +3332,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_SMD:D_1812_4532Metric_Pad1.30x3.40mm_HandSolder"
 			(at 45.72 34.29 0)
 			(effects
 				(font
@@ -3500,80 +3502,6 @@
 			(project "diploma_pcb"
 				(path "/8eade999-89f4-4618-aeea-e9238b0bd165"
 					(reference "Rf1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Transistor_BJT:BC107")
-		(at 38.1 55.88 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "30ea9075-1b7a-4e19-827d-7c7d52534632")
-		(property "Reference" "Q1"
-			(at 38.1 46.99 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "2n3904"
-			(at 38.1 49.53 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 40.005 50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.b-kainka.de/Daten/Transistor/BC108.pdf"
-			(at 38.1 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "0.1A Ic, 50V Vce, Low Noise General Purpose NPN Transistor, TO-18"
-			(at 38.1 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "c83f3799-e25e-40a7-81fc-3973952bec33")
-		)
-		(pin "1"
-			(uuid "38f14e6d-7eda-4951-9a24-c422de6832c1")
-		)
-		(pin "2"
-			(uuid "8d06d9ca-4879-4cae-b621-5eb06d969eaa")
-		)
-		(instances
-			(project ""
-				(path "/8eade999-89f4-4618-aeea-e9238b0bd165"
-					(reference "Q1")
 					(unit 1)
 				)
 			)
@@ -4541,7 +4469,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 38.1 63.5 0)
+		(at 38.1 60.96 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4550,7 +4478,7 @@
 		(fields_autoplaced yes)
 		(uuid "83fbd4c6-1378-47e2-94af-fe7a8866aef4")
 		(property "Reference" "#PWR08"
-			(at 38.1 69.85 0)
+			(at 38.1 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4559,7 +4487,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 38.1 68.58 0)
+			(at 38.1 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4567,7 +4495,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 38.1 63.5 0)
+			(at 38.1 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4576,7 +4504,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 38.1 63.5 0)
+			(at 38.1 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4585,7 +4513,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 38.1 63.5 0)
+			(at 38.1 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5053,7 +4981,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_SMD:D_1812_4532Metric_Pad1.30x3.40mm_HandSolder"
 			(at 45.72 26.67 0)
 			(effects
 				(font
@@ -5490,6 +5418,80 @@
 			(project "diploma_pcb"
 				(path "/8eade999-89f4-4618-aeea-e9238b0bd165"
 					(reference "C_supply1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_BJT:MMBTA44")
+		(at 38.1 55.88 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e9952e17-8270-42d0-a67a-961d6ba91bd3")
+		(property "Reference" "Q2"
+			(at 38.1 46.99 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2n3904"
+			(at 38.1 49.53 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 40.005 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://diotec.com/request/datasheet/mmbta42.pdf"
+			(at 38.1 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.3A Ic, 400V Vce, NPN High Voltage Transistor, SOT-23"
+			(at 38.1 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "fb989c51-e483-463c-9fb4-3b5e698c84ff")
+		)
+		(pin "1"
+			(uuid "8d9d5f7f-59dd-4538-9df2-29fdbccd232c")
+		)
+		(pin "3"
+			(uuid "67532559-5d12-4851-9c8e-5d6f869c978d")
+		)
+		(instances
+			(project ""
+				(path "/8eade999-89f4-4618-aeea-e9238b0bd165"
+					(reference "Q2")
 					(unit 1)
 				)
 			)
