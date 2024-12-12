@@ -1,0 +1,11 @@
+FILE_TYPE = MULTI_PHYS_TABLE;
+
+PART 'MCP6291T_E_OT'
+CLASS = IC
+{========================================================================================}
+:"MANUFACTURER_NAME", "MANUFACTURER_PART_NUMBER"= "PART_NUMBER", "JEDEC_TYPE", "PACK_TYPE", "FARNELL_PART_NUMBER", "FARNELL_PRICE/STOCK", "DESCRIPTION", "DATASHEET", "HEIGHT";
+{========================================================================================}
+ "Microchip", "MCP6291T-E/OT" (!) = "", "SOT95P280X145-5N", "SOT23 (5-Pin)", "", "", "Single 10MHz OpAmp,MCP6291T-E/OT", "https://datasheet.datasheetarchive.com/originals/distributors/SFDatasheet-4/sf-00090098.pdf", "1.45 mm"
+END_PART
+
+END.

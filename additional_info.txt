@@ -14,3 +14,5 @@ Daemon stuff😈:
 
 WSL 
 	usbipd - https://learn.microsoft.com/en-us/windows/wsl/connect-usb
+PCB
+	Schottkey diode - https://www.digikey.com/en/products/detail/onsemi/MBRS1100T3G/918634?msockid=0b0d31f247316448018f24c8464465f9

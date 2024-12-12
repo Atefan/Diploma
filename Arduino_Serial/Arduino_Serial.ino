@@ -19,7 +19,7 @@ void setup_PWM()
   DDRD |= (1 << PD3); // set D3 to output
 
   TCNT2 = 0;
-  TCCR2A = 0;
+  TCCR2A = 0;acc
   TCCR2A = 0;
   TIFR2 = 0;
   TIMSK2 = 0;
