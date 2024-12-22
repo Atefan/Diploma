@@ -1,1 +1,0 @@
-savedcmd_/media/sf_Driver_shared_folder/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /media/sf_Driver_shared_folder/Module.symvers -T /media/sf_Driver_shared_folder/modules.order -i Module.symvers -e 

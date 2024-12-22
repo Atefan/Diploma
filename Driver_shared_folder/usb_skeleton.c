@@ -4,11 +4,40 @@
 #include <linux/usb.h>
 #include <linux/slab.h>
 #include <linux/poll.h>
+#include <linux/kthread.h>
+#include <linux/delay.h>
+
 #include <linux/random.h>
 
-#define MODULE_NAME		"StefanModuleName"
-#define USB_VENDOR_ID		0x1a86
-#define USB_PRODUCT_ID		0x7523
+
+
+
+#define MODULE_NAME		"usb_skel"
+#define USB_VENDOR_ID		0x1010
+#define USB_PRODUCT_ID		0x1010
+
+struct usb_skel {
+	struct usb_device	*udev;
+	struct usb_interface	*interface;
+	size_t			bulk_in_size;
+	__u8			bulk_in_endpointAddr;
+	__u8			bulk_out_endpointAddr;
+	unsigned char		*bulk_in_buffer;
+	size_t			int_in_size;
+	__u8			int_in_endpointAddr;
+	unsigned char		*int_in_buffer;
+	struct urb		*irq_urb;
+
+	atomic_t can_rd;
+
+	struct kref		kref;
+	wait_queue_head_t	wq;
+
+	struct task_struct *polling_thread;
+	bool thread_should_stop;
+};
+
+#define to_skel_dev(d)	container_of(d, struct usb_skel, kref)
 
 #define USB_SKEL_MINOR_BASE	192
 
@@ -35,7 +64,6 @@ static void skel_delete(struct kref *kref)
 
 	kfree(dev);
 }
-unsigned int skel_poll(struct file *filp, poll_table *wait);
 
 static struct usb_driver skel_driver;
 
@@ -194,68 +222,99 @@ error:
 	return retval;
 }
 
+unsigned int skel_poll(struct file *filp, poll_table *wait)
+{
+	unsigned int mask = 0;
+	struct usb_skel *dev = filp->private_data;
+
+	poll_wait(filp, &dev->wq, wait);
+	if (atomic_dec_and_test(&dev->can_rd)) {
+		pr_debug("Now fd can be read\n");
+		mask |= POLLIN | POLLRDNORM;
+	}
+
+	return mask;
+}
+
 static struct file_operations skel_fops = {
 	.owner =	THIS_MODULE,
 	.read =		skel_read,
 	.write =	skel_write,
+	.poll =		skel_poll,
 	.open =		skel_open,
 	.release =	skel_release,
 };
-ar
+
 static struct usb_class_driver skel_class = {
 	.name	= "usb/skel%d",
 	.fops	= &skel_fops,
 	.minor_base = USB_SKEL_MINOR_BASE,
 };
 
-static void usb_irq(struct urb *urb)
+
+static int polling_thread_func(void *data)
 {
-	struct usb_skel *dev = urb->context;
-	int status;
-	int *data = (int*)(dev->int_in_buffer);
+	struct usb_skel *dev = (struct usb_skel *)data;
+	int retval;
+	int actual_length;
+	char *buffer;
 
-
-	switch (urb->status) {
-	case 0:			/* success */
-		break;
-	case -ECONNRESET:	/* unlink */
-	case -ENOENT:
-	case -ESHUTDOWN:
-		return;
-	/* -EPIPE:  should clear the halt */
-	default:		/* error */
-		goto resubmit;
+	buffer = kmalloc(dev->bulk_in_size, GFP_KERNEL);
+	if (!buffer) {
+		pr_err("Failed to allocate buffer for polling\n");
+		return -ENOMEM;
 	}
 
-	if (data[0] > 0) {
-		// Data available
-		atomic_set(&dev->can_rd, 1);
-		wake_up_interruptible(&dev->wq);
-	}
-		
-	pr_debug("interrupt: %x:%x\n", data[0], data[1]);
+	while (!kthread_should_stop()) {
+		/* Poll for data every 5 seconds */
+		msleep_interruptible(1000);
 
-resubmit:
-	status = usb_submit_urb(urb, GFP_ATOMIC);
-	if (status)
-		dev_err(&dev->udev->dev,
-			"can't resubmit intr, %s-%s/input0, status %d\n",
-			dev->udev->bus->bus_name,
-			dev->udev->devpath, status);
+		if (dev->thread_should_stop)
+			break;
+
+		/* Request data from the bulk-in endpoint */
+		retval = usb_bulk_msg(dev->udev,
+				      usb_rcvbulkpipe(dev->udev, dev->bulk_in_endpointAddr),
+				      buffer, dev->bulk_in_size, &actual_length, 5000);
+		if (retval) {
+			pr_err("Bulk read error: %d\n", retval);
+			continue;
+		}
+
+		if (actual_length > 0) {
+			if (actual_length < sizeof(buffer)) {
+				buffer[actual_length] = '\0';
+			} else {
+				buffer[sizeof(buffer) - 1] = '\0';
+			}
+
+			pr_info("Received %d bytes: ", actual_length);
+			for (int i = 0; i < actual_length; i++) {
+				pr_cont("%c", buffer[i]);
+			}
+			pr_info("\n");
+
+			//add_hwgenerator_randomness(buffer, actual_length, actual_length , false);
+
+		} else {
+			pr_info("No data received\n");
+		}
+	}
+
+	kfree(buffer);
+	return 0;
 }
-
 static int skel_probe(struct usb_interface *interface, const struct usb_device_id *id)
 {
-	int pipe, maxp;
-	struct usb_skel *dev = NULL;
-	struct usb_endpoint_descriptor *bulk_in, *bulk_out, *int_in;
 	int retval = -ENOMEM;
+	struct usb_skel *dev = NULL;
+	struct usb_endpoint_descriptor *bulk_in, *bulk_out;
 
-    printk(KERN_DEBUG "probe usb\n");
+	dev_info(&interface->dev,"probe usb\n");
 
 	dev = kzalloc(sizeof(struct usb_skel), GFP_KERNEL);
 	if (!dev) {
-		printk(KERN_DEBUG "Out of memory");
+		pr_err("Out of memory");
 		goto error;
 	}
 	kref_init(&dev->kref);
@@ -263,13 +322,34 @@ static int skel_probe(struct usb_interface *interface, const struct usb_device_i
 	dev->udev = usb_get_dev(interface_to_usbdev(interface));
 	dev->interface = interface;
 
-	retval = usb_find_common_endpoints(interface->cur_altsetting,
-			&bulk_in, &bulk_out, &int_in, NULL);
-	if (retval) {
-		printk(KERN_DEBUG "Could not find both bulk-in and bulk-out endpoints\n");
-		goto error;
-	}
+    retval = usb_control_msg(dev->udev,
+                             usb_sndctrlpipe(dev->udev, 0),
+                             USB_REQ_SET_CONFIGURATION, // SET_CONFIGURATION request
+                             USB_DIR_OUT | USB_TYPE_STANDARD | USB_RECIP_DEVICE,
+                             1, // Configuration value
+                             0,
+                             NULL,
+                             0,
+                             5000
+    );
 
+    if (retval < 0) {
+        printk(KERN_ERR "Failed to set device configuration: %d\n", retval);
+        return retval;
+    }else
+		dev_info(&interface->dev,"usb_control_msg Successfull !\n");
+
+	/* Find bulk-in and bulk-out endpoints */
+	retval = usb_find_common_endpoints(interface->cur_altsetting,
+			&bulk_in, &bulk_out, NULL, NULL);
+	if (retval) {
+		dev_err(&interface->dev,
+			"Could not find both bulk-in and bulk-out endpoints\n");
+		goto error;
+	}else
+		dev_info(&interface->dev,"Endpoints found!\n");
+	
+	/* Initialize bulk-in endpoint */
 	dev->bulk_in_size = usb_endpoint_maxp(bulk_in);
 	dev->bulk_in_endpointAddr = bulk_in->bEndpointAddress;
 	dev->bulk_in_buffer = kmalloc(dev->bulk_in_size, GFP_KERNEL);
@@ -277,48 +357,36 @@ static int skel_probe(struct usb_interface *interface, const struct usb_device_i
 		retval = -ENOMEM;
 		goto error;
 	}
+
+	/* Initialize bulk-out endpoint */
 	dev->bulk_out_endpointAddr = bulk_out->bEndpointAddress;
 
-	dev->int_in_size = usb_endpoint_maxp(int_in);
-	dev->int_in_endpointAddr = int_in->bEndpointAddress;
-
-	dev->irq_urb = usb_alloc_urb(0, GFP_KERNEL);
-	if (!dev->irq_urb) {
-		printk(KERN_DEBUG "alloc irq urb failed\n");
-		retval = -ENOMEM;
-		goto error;
-	}
-
-	pipe = usb_rcvintpipe(dev->udev, dev->int_in_endpointAddr);
-	maxp = usb_maxpacket(dev->udev, pipe);
-
-	dev->int_in_buffer = usb_alloc_coherent(dev->udev, 8, GFP_ATOMIC, &dev->irq_urb->transfer_dma);
-	if (!dev->int_in_buffer) {
-		retval = -ENOMEM;
-		printk(KERN_DEBUG "alloc coherent failed\n");
-		goto error;
-	}
-
-	usb_fill_int_urb(dev->irq_urb, dev->udev, pipe, dev->int_in_buffer,
-			 (maxp > 8 ? 8 : maxp),
-			 usb_irq, dev, int_in->bInterval);
-	dev->irq_urb->transfer_flags |= URB_NO_TRANSFER_DMA_MAP;
-
-	printk(KERN_DEBUG "int in size: %ld\n", dev->int_in_size);
-
+	/* Setup waitqueue */
 	atomic_set(&dev->can_rd, 0);
 	init_waitqueue_head(&dev->wq);
+
 	usb_set_intfdata(interface, dev);
 
-	retval = usb_register_dev(interface, &skel_class);
-	if (retval) {
-		/* something prevented us from registering this driver */
-		printk(KERN_DEBUG "Not able to get a minor for this device.");
-		usb_set_intfdata(interface, NULL);
+	/* Start polling thread */
+	dev->thread_should_stop = false;
+	dev->polling_thread = kthread_run(polling_thread_func, dev, "usb_skel_polling");
+	if (IS_ERR(dev->polling_thread)) {
+		pr_err("Failed to create polling thread\n");
+		retval = PTR_ERR(dev->polling_thread);
 		goto error;
 	}
 
-	printk(KERN_DEBUG  "USB Skeleton device now attached to USBSkel-%d", interface->minor);
+	/* Register the device */
+	retval = usb_register_dev(interface, &skel_class);
+	if (retval) {
+		pr_err("Not able to get a minor for this device.");
+		usb_set_intfdata(interface, NULL);
+		dev->thread_should_stop = true;
+		kthread_stop(dev->polling_thread);
+		goto error;
+	}
+
+	dev_info(&interface->dev, "USB Skeleton device now attached to USBSkel-%d", interface->minor);
 	return 0;
 
 error:
@@ -335,11 +403,18 @@ static void skel_disconnect(struct usb_interface *interface)
 	dev = usb_get_intfdata(interface);
 	usb_set_intfdata(interface, NULL);
 
+	/* Stop polling thread */
+	if (dev->polling_thread) {
+		dev->thread_should_stop = true;
+		kthread_stop(dev->polling_thread);
+	}
+
 	usb_deregister_dev(interface, &skel_class);
 
 	kref_put(&dev->kref, skel_delete);
 	dev_info(&interface->dev, "USB Skeleton #%d now disconnected\n", minor);
 }
+
 
 static struct usb_driver skel_driver = {
 	.name	= "usb_skeleton",
