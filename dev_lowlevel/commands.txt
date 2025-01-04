@@ -1,0 +1,28 @@
+// compile the module
+
+    cd ~/pico/my_code/pico-examples/build$
+    cmake --build ./
+
+// rebuild the sysstem
+    cd .. && rm -rf build && mkdir build && cd build
+    cmake .. -DPICO_BOARD=pico_w
+
+// load the code
+
+    (plug pico with BOOTSET button pressed)
+    (copy from \\wsl.localhost\Ubuntu\home\stefan\pico\my_code\pico-examples\build\usb\device\dev_lowlevel)
+
+// edit code
+
+    cd ~pico\my_code\pico-examples\build\usb\device\dev_lowlevel
+    code .
+
+// move USB to WSL2
+
+    log as Admin
+    usbipd list
+    usbipd bind --busid 1-4
+    usbipd attach --wsl --busid 1-4
+    usbipd detach --busid 1-4
+
+

@@ -1,58 +1,13 @@
-/**
- * Copyright (c) 2020 Raspberry Pi (Trading) Ltd.
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
-
-#include <stdio.h>
-
-// Pico
-#include "pico/stdlib.h"
-
-// For memcpy
-#include <string.h>
-
-// Include descriptor struct definitions
-#include "usb_common.h"
-// USB register definitions from pico-sdk
-#include "hardware/regs/usb.h"
-// USB hardware struct definitions from pico-sdk
-#include "hardware/structs/usb.h"
-// For interrupt enable and numbers
-#include "hardware/irq.h"
-// For resetting the USB controller
-#include "hardware/resets.h"
-
-
-#include "hardware/uart.h"
-
-// Define UART1 and pin numbers
-#define UART_ID uart1
-#define BAUD_RATE 115200
-#define UART_TX_PIN 8 
-#define UART_RX_PIN 9 
-
-void init_pins()
-{
-    // Initialize chosen serial port
-    uart_init(UART_ID, BAUD_RATE);
-
-    // Set GPIO function for UART
-    gpio_set_function(UART_TX_PIN, GPIO_FUNC_UART);
-    gpio_set_function(UART_RX_PIN, GPIO_FUNC_UART);
-
-    uart_set_format(UART_ID, 8, 1, UART_PARITY_NONE);
-    
-    uart_set_fifo_enabled(UART_ID, true);
-}
-
-
 // Device descriptors
-#include "dev_lowlevel.h"
+#include "usb_protocol.h"
 
 #define usb_hw_set ((usb_hw_t *)hw_set_alias_untyped(usb_hw))
 #define usb_hw_clear ((usb_hw_t *)hw_clear_alias_untyped(usb_hw))
 
+const unsigned char *descriptor_strings[] = {
+    (unsigned char *)"Raspberry Pi",    // Vendor
+    (unsigned char *)"Stefan Device" // Product
+};
 // Function prototypes for our device specific endpoint handlers defined
 // later on
 void ep0_in_handler(uint8_t *buf, uint16_t len);
@@ -63,8 +18,7 @@ void ep2_in_handler(uint8_t *buf, uint16_t len);
 // Global device address
 static bool should_set_address = false;
 static uint8_t dev_addr = 0;
-static volatile bool configured = false;
-static volatile char stat = 0b00001111;
+volatile bool configured = false;
 
 // Global data buffer for EP0
 static uint8_t ep0_buf[64];
@@ -172,7 +126,7 @@ static inline uint32_t usb_buffer_offset(volatile uint8_t *buf) {
  * @param ep
  */
 void usb_setup_endpoint(const struct usb_endpoint_configuration *ep) {
-    printf("Set up endpoint 0x%x with buffer address 0x%p\n", ep->descriptor->bEndpointAddress, ep->data_buffer);
+    //f("Set up endpoint 0x%x with buffer address 0x%p\n", ep->descriptor->bEndpointAddress, ep->data_buffer);
 
     // EP0 doesn't have one so return if that is the case
     if (!ep->endpoint_control) {
@@ -265,11 +219,11 @@ void usb_start_transfer(struct usb_endpoint_configuration *ep, uint8_t *buf, uin
     // For multi packet transfers see the tinyusb port.
     assert(len <= 64);
 
-    printf("Start transfer of len %d on ep addr 0x%x\n", len, ep->descriptor->bEndpointAddress);
+    //f("Start transfer of len %d on ep addr 0x%x\n", len, ep->descriptor->bEndpointAddress);
 
     // Prepare buffer control register value
     uint32_t val = len | USB_BUF_CTRL_AVAIL;
-
+    
     if (ep_is_tx(ep)) {
         // Need to copy the data from the user buffer to the usb memory
         memcpy((void *) ep->data_buffer, (void *) buf, len);
@@ -382,7 +336,7 @@ void usb_set_device_address(volatile struct usb_setup_packet *pkt) {
     // Set address is a bit of a strange case because we have to send a 0 length status packet first with
     // address 0
     dev_addr = (pkt->wValue & 0xff);
-    printf("Set address %d\r\n", dev_addr);
+    //f("Set address %d\r\n", dev_addr);
     // Will set address in the callback phase
     should_set_address = true;
     usb_acknowledge_out_request();
@@ -396,10 +350,9 @@ void usb_set_device_address(volatile struct usb_setup_packet *pkt) {
  */
 void usb_set_device_configuration(__unused volatile struct usb_setup_packet *pkt) {
     // Only one configuration so just acknowledge the request
-    printf("Device Enumerated\r\n");
+    //f("Device Enumerated\r\n");
     usb_acknowledge_out_request();
     configured = true;
-    stat = 0b11110000;
 }
 
 /**
@@ -421,7 +374,7 @@ void usb_handle_setup_packet(void) {
             usb_set_device_configuration(pkt);
         } else {
             usb_acknowledge_out_request();
-            printf("Other OUT request (0x%x)\r\n", pkt->bRequest);
+            //f("Other OUT request (0x%x)\r\n", pkt->bRequest);
         }
     } else if (req_direction == USB_DIR_IN) {
         if (req == USB_REQUEST_GET_DESCRIPTOR) {
@@ -430,24 +383,25 @@ void usb_handle_setup_packet(void) {
             switch (descriptor_type) {
                 case USB_DT_DEVICE:
                     usb_handle_device_descriptor(pkt);
-                    printf("GET DEVICE DESCRIPTOR\r\n");
+                    //f("GET DEVICE DESCRIPTOR\r\n");
                     break;
 
                 case USB_DT_CONFIG:
                     usb_handle_config_descriptor(pkt);
-                    printf("GET CONFIG DESCRIPTOR\r\n");
+                    //f("GET CONFIG DESCRIPTOR\r\n");
                     break;
 
                 case USB_DT_STRING:
                     usb_handle_string_descriptor(pkt);
-                    printf("GET STRING DESCRIPTOR\r\n");
+                    //f("GET STRING DESCRIPTOR\r\n");
                     break;
 
                 default:
-                    printf("Unhandled GET_DESCRIPTOR type 0x%x\r\n", descriptor_type);
+                ;
+                    //f("Unhandled GET_DESCRIPTOR type 0x%x\r\n", descriptor_type);
             }
         } else {
-            printf("Other IN request (0x%x)\r\n", pkt->bRequest);
+            //f("Other IN request (0x%x)\r\n", pkt->bRequest);
         }
     }
 }
@@ -475,7 +429,7 @@ static void usb_handle_ep_buff_done(struct usb_endpoint_configuration *ep) {
  */
 static void usb_handle_buff_done(uint ep_num, bool in) {
     uint8_t ep_addr = ep_num | (in ? USB_DIR_IN : 0);
-    printf("EP %d (in = %d) done\n", ep_num, in);
+    //f("EP %d (in = %d) done\n", ep_num, in);
     for (uint i = 0; i < USB_NUM_ENDPOINTS; i++) {
         struct usb_endpoint_configuration *ep = &dev_config.endpoints[i];
         if (ep->descriptor && ep->handler) {
@@ -538,7 +492,7 @@ void isr_usbctrl(void) {
 
     // Bus is reset
     if (status & USB_INTS_BUS_RESET_BITS) {
-        printf("BUS RESET\n");
+        //f("BUS RESET\n");
         handled |= USB_INTS_BUS_RESET_BITS;
         usb_hw_clear->sie_status = USB_SIE_STATUS_BUS_RESET_BITS;
         usb_bus_reset();
@@ -576,44 +530,14 @@ void ep0_out_handler(__unused uint8_t *buf, __unused uint16_t len) {
 
 // Device specific functions
 void ep1_out_handler(uint8_t *buf, uint16_t len) {
-    printf("RX %d bytes from host\n", len);
+    //f("RX %d bytes from host\n", len);
     // Send data back to host
     struct usb_endpoint_configuration *ep = usb_get_endpoint_configuration(EP2_IN_ADDR);
     usb_start_transfer(ep, buf, len);
-    
-    stat = 0b00000011;
 }
 
 void ep2_in_handler(__unused uint8_t *buf, uint16_t len) {
-    printf("Sent %d bytes to host\n", len);
+    //f("Sent %d bytes to host\n", len);
     // Get ready to rx again from host
     usb_start_transfer(usb_get_endpoint_configuration(EP1_OUT_ADDR), NULL, 64);
-
-    stat = 0b00001100;
-}
-
-int main(void) {
-    
-    stdio_init_all();
-    usb_device_init();
-    init_pins();
-    // Wait until configured
-    while (!configured) {
-        uart_putc(UART_ID, stat);
-        sleep_ms(1);
-        tight_loop_contents();
-    }
-
-    // Get ready to rx from host
-    usb_start_transfer(usb_get_endpoint_configuration(EP1_OUT_ADDR), NULL, 64);
-
-    // Everything is interrupt driven so just loop here
-    while (1) {
-        
-        uart_putc(UART_ID, stat);
-        sleep_ms(10);
-        char arr[19] = "Hello from Device!";
-        usb_start_transfer(usb_get_endpoint_configuration(EP2_IN_ADDR), (uint8_t *)arr, sizeof(arr));
-        tight_loop_contents();
-    }
 }

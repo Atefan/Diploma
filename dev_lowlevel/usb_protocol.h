@@ -4,10 +4,28 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#ifndef DEV_LOWLEVEL_H_
-#define DEV_LOWLEVEL_H_
+#pragma once
+// Pico
+#include "pico/stdlib.h"
 
+// For memcpy
+#include <string.h>
+
+// Include descriptor struct definitions
 #include "usb_common.h"
+// USB register definitions from pico-sdk
+#include "hardware/regs/usb.h"
+// USB hardware struct definitions from pico-sdk
+#include "hardware/structs/usb.h"
+// For interrupt enable and numbers
+#include "hardware/irq.h"
+// For resetting the USB controller
+#include "hardware/resets.h"
+
+
+
+#include "/home/stefan/usb-common.h"
+
 
 typedef void (*usb_ep_handler)(uint8_t *buf, uint16_t len);
 
@@ -70,8 +88,8 @@ static const struct usb_device_descriptor device_descriptor = {
         .bDeviceSubClass = 0,      // No subclass
         .bDeviceProtocol = 0,      // No protocol
         .bMaxPacketSize0 = 64,     // Max packet size for ep0
-        .idVendor        = 0x1010, // Your vendor id
-        .idProduct       = 0x1010, // Your product ID
+        .idVendor        = VENDOR, // Your vendor id
+        .idProduct       = PRODUCT, // Your product ID
         .bcdDevice       = 0,      // No device revision number
         .iManufacturer   = 1,      // Manufacturer string index
         .iProduct        = 2,      // Product string index
@@ -129,9 +147,11 @@ static const unsigned char lang_descriptor[] = {
         0x09, 0x04 // language id = us english
 };
 
-static const unsigned char *descriptor_strings[] = {
-        (unsigned char *) "Raspberry Pi",    // Vendor
-        (unsigned char *) "Pico Test Device" // Product
-};
 
-#endif
+
+extern volatile bool configured;
+
+void usb_device_init(void);
+void usb_start_transfer(struct usb_endpoint_configuration *ep, uint8_t *buf, uint16_t len);
+struct usb_endpoint_configuration *usb_get_endpoint_configuration(uint8_t addr);
+

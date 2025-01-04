@@ -9,12 +9,9 @@
 
 #include <linux/random.h>
 
-
-
+#include "/home/stefan/usb-common.h"
 
 #define MODULE_NAME		"usb_skel"
-#define USB_VENDOR_ID		0x1010
-#define USB_PRODUCT_ID		0x1010
 
 struct usb_skel {
 	struct usb_device	*udev;
@@ -42,7 +39,7 @@ struct usb_skel {
 #define USB_SKEL_MINOR_BASE	192
 
 static struct usb_device_id skel_table[] = {
-	{ USB_DEVICE(USB_VENDOR_ID, USB_PRODUCT_ID) },
+	{ USB_DEVICE(VENDOR, PRODUCT) },
 	{ }
 };
 MODULE_DEVICE_TABLE(usb, skel_table);
@@ -266,13 +263,11 @@ static int polling_thread_func(void *data)
 	}
 
 	while (!kthread_should_stop()) {
-		/* Poll for data every 5 seconds */
 		msleep_interruptible(1000);
 
 		if (dev->thread_should_stop)
 			break;
 
-		/* Request data from the bulk-in endpoint */
 		retval = usb_bulk_msg(dev->udev,
 				      usb_rcvbulkpipe(dev->udev, dev->bulk_in_endpointAddr),
 				      buffer, dev->bulk_in_size, &actual_length, 5000);
