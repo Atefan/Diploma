@@ -1,0 +1,3 @@
+/home/stefan/pico/my_code/Entrpy/build/_deps/picotool-subbuild/CMakeFiles/picotool-populate.dir
+/home/stefan/pico/my_code/Entrpy/build/_deps/picotool-subbuild/CMakeFiles/edit_cache.dir
+/home/stefan/pico/my_code/Entrpy/build/_deps/picotool-subbuild/CMakeFiles/rebuild_cache.dir

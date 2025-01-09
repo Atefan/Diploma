@@ -1,0 +1,33 @@
+// compile the module
+
+    cd ~/pico/my_code/pico-examples/build$
+    cmake --build ./
+
+// load the code
+
+    (plug pico with BOOTSET button pressed)
+    (copy from \\wsl.localhost\Ubuntu\home\stefan\pico\my_code\pico-examples\build\usb\device\dev_lowlevel)
+
+// edit code
+
+    cd ~pico\my_code\pico-examples\build\usb\device\dev_lowlevel
+    code .
+
+// move USB to WSL2
+
+    log as Admin
+    usbipd list
+    usbipd bind --busid 1-4
+    usbipd attach --wsl --busid 1-4
+    usbipd detach --busid 1-4
+
+//additional
+
+    gcc -o read_stefan read_stefan.c
+    ls -l /dev/Entropy
+    sudo chmod 666 /dev/Entropy 
+// QEMU
+    download the VM
+	cd C:\VMs && qemu-system-x86_64 -L "C:\Program Files\qemu" -cdrom C:\Users\stefa\Downloads\ubuntu-22.04.5-desktop-amd64.iso -hda ubuntu.img -m 4G -boot d
+    run the VM
+	cd C:\VMs && qemu-system-x86_64 -L "C:\Program Files\qemu" -cdrom C:\Users\stefa\Downloads\ubuntu-22.04.5-desktop-amd64.iso -hda ubuntu.img -m 4G -boot d
