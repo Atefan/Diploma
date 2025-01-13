@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-file_path = './../GUI/bit_data'
+file_path = './noise.bin'
 
 bit_counts = [0] * 8
 total_bytes = 0

@@ -30,4 +30,4 @@ def process_binary_file(file_path):
     except Exception as e:
         print(f"An error occurred: {e}")
 
-process_binary_file('./../GUI/bit_data')
+process_binary_file('./noise.bin')

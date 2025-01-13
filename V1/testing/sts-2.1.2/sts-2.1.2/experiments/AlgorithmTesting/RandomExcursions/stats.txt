@@ -2,8 +2,8 @@
 		--------------------------------------------
 		COMPUTATIONAL INFORMATION:
 		--------------------------------------------
-		(a) Number Of Cycles (J) = 0007
-		(b) Sequence Length (n)  = 39836
+		(a) Number Of Cycles (J) = 0004
+		(b) Sequence Length (n)  = 100000
 		---------------------------------------------
 		WARNING:  TEST NOT APPLICABLE.  THERE ARE AN
 			  INSUFFICIENT NUMBER OF CYCLES.
@@ -13,8 +13,8 @@
 		--------------------------------------------
 		COMPUTATIONAL INFORMATION:
 		--------------------------------------------
-		(a) Number Of Cycles (J) = 0006
-		(b) Sequence Length (n)  = 39836
+		(a) Number Of Cycles (J) = 0011
+		(b) Sequence Length (n)  = 100000
 		---------------------------------------------
 		WARNING:  TEST NOT APPLICABLE.  THERE ARE AN
 			  INSUFFICIENT NUMBER OF CYCLES.
@@ -24,8 +24,8 @@
 		--------------------------------------------
 		COMPUTATIONAL INFORMATION:
 		--------------------------------------------
-		(a) Number Of Cycles (J) = 0002
-		(b) Sequence Length (n)  = 39836
+		(a) Number Of Cycles (J) = 0111
+		(b) Sequence Length (n)  = 100000
 		---------------------------------------------
 		WARNING:  TEST NOT APPLICABLE.  THERE ARE AN
 			  INSUFFICIENT NUMBER OF CYCLES.
@@ -35,19 +35,8 @@
 		--------------------------------------------
 		COMPUTATIONAL INFORMATION:
 		--------------------------------------------
-		(a) Number Of Cycles (J) = 0002
-		(b) Sequence Length (n)  = 39836
-		---------------------------------------------
-		WARNING:  TEST NOT APPLICABLE.  THERE ARE AN
-			  INSUFFICIENT NUMBER OF CYCLES.
-		---------------------------------------------
-
-			  RANDOM EXCURSIONS TEST
-		--------------------------------------------
-		COMPUTATIONAL INFORMATION:
-		--------------------------------------------
-		(a) Number Of Cycles (J) = 0001
-		(b) Sequence Length (n)  = 39836
+		(a) Number Of Cycles (J) = 0020
+		(b) Sequence Length (n)  = 100000
 		---------------------------------------------
 		WARNING:  TEST NOT APPLICABLE.  THERE ARE AN
 			  INSUFFICIENT NUMBER OF CYCLES.
@@ -58,7 +47,7 @@
 		COMPUTATIONAL INFORMATION:
 		--------------------------------------------
 		(a) Number Of Cycles (J) = 0005
-		(b) Sequence Length (n)  = 39836
+		(b) Sequence Length (n)  = 100000
 		---------------------------------------------
 		WARNING:  TEST NOT APPLICABLE.  THERE ARE AN
 			  INSUFFICIENT NUMBER OF CYCLES.
@@ -69,7 +58,7 @@
 		COMPUTATIONAL INFORMATION:
 		--------------------------------------------
 		(a) Number Of Cycles (J) = 0001
-		(b) Sequence Length (n)  = 39836
+		(b) Sequence Length (n)  = 100000
 		---------------------------------------------
 		WARNING:  TEST NOT APPLICABLE.  THERE ARE AN
 			  INSUFFICIENT NUMBER OF CYCLES.
@@ -79,8 +68,19 @@
 		--------------------------------------------
 		COMPUTATIONAL INFORMATION:
 		--------------------------------------------
-		(a) Number Of Cycles (J) = 0022
-		(b) Sequence Length (n)  = 39836
+		(a) Number Of Cycles (J) = 0010
+		(b) Sequence Length (n)  = 100000
+		---------------------------------------------
+		WARNING:  TEST NOT APPLICABLE.  THERE ARE AN
+			  INSUFFICIENT NUMBER OF CYCLES.
+		---------------------------------------------
+
+			  RANDOM EXCURSIONS TEST
+		--------------------------------------------
+		COMPUTATIONAL INFORMATION:
+		--------------------------------------------
+		(a) Number Of Cycles (J) = 0077
+		(b) Sequence Length (n)  = 100000
 		---------------------------------------------
 		WARNING:  TEST NOT APPLICABLE.  THERE ARE AN
 			  INSUFFICIENT NUMBER OF CYCLES.
@@ -91,7 +91,7 @@
 		COMPUTATIONAL INFORMATION:
 		--------------------------------------------
 		(a) Number Of Cycles (J) = 0003
-		(b) Sequence Length (n)  = 39836
+		(b) Sequence Length (n)  = 100000
 		---------------------------------------------
 		WARNING:  TEST NOT APPLICABLE.  THERE ARE AN
 			  INSUFFICIENT NUMBER OF CYCLES.
@@ -101,8 +101,8 @@
 		--------------------------------------------
 		COMPUTATIONAL INFORMATION:
 		--------------------------------------------
-		(a) Number Of Cycles (J) = 0004
-		(b) Sequence Length (n)  = 39836
+		(a) Number Of Cycles (J) = 0038
+		(b) Sequence Length (n)  = 100000
 		---------------------------------------------
 		WARNING:  TEST NOT APPLICABLE.  THERE ARE AN
 			  INSUFFICIENT NUMBER OF CYCLES.

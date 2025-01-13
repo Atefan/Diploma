@@ -3,11 +3,11 @@
 		COMPUTATIONAL INFORMATION:
 		--------------------------------------------
 		(a) m (block length)    = 10
-		(b) n (sequence length) = 39836
-		(c) Chi^2               = 11991.423147
-		(d) Phi(m)	       = -6.404630
-		(e) Phi(m+1)	       = -6.947268
-		(f) ApEn                = 0.542637
+		(b) n (sequence length) = 100000
+		(c) Chi^2               = 1509.016476
+		(d) Phi(m)	       = -6.906420
+		(e) Phi(m+1)	       = -7.592022
+		(f) ApEn                = 0.685602
 		(g) Log(2)              = 0.693147
 		--------------------------------------------
 FAILURE		p_value = 0.000000
@@ -17,11 +17,11 @@ FAILURE		p_value = 0.000000
 		COMPUTATIONAL INFORMATION:
 		--------------------------------------------
 		(a) m (block length)    = 10
-		(b) n (sequence length) = 39836
-		(c) Chi^2               = 12366.358998
-		(d) Phi(m)	       = -6.405246
-		(e) Phi(m+1)	       = -6.943177
-		(f) ApEn                = 0.537931
+		(b) n (sequence length) = 100000
+		(c) Chi^2               = 1437.619400
+		(d) Phi(m)	       = -6.907184
+		(e) Phi(m+1)	       = -7.593143
+		(f) ApEn                = 0.685959
 		(g) Log(2)              = 0.693147
 		--------------------------------------------
 FAILURE		p_value = 0.000000
@@ -31,11 +31,11 @@ FAILURE		p_value = 0.000000
 		COMPUTATIONAL INFORMATION:
 		--------------------------------------------
 		(a) m (block length)    = 10
-		(b) n (sequence length) = 39836
-		(c) Chi^2               = 12048.945417
-		(d) Phi(m)	       = -6.407908
-		(e) Phi(m+1)	       = -6.949823
-		(f) ApEn                = 0.541915
+		(b) n (sequence length) = 100000
+		(c) Chi^2               = 1474.980612
+		(d) Phi(m)	       = -6.908710
+		(e) Phi(m+1)	       = -7.594483
+		(f) ApEn                = 0.685772
 		(g) Log(2)              = 0.693147
 		--------------------------------------------
 FAILURE		p_value = 0.000000
@@ -45,11 +45,11 @@ FAILURE		p_value = 0.000000
 		COMPUTATIONAL INFORMATION:
 		--------------------------------------------
 		(a) m (block length)    = 10
-		(b) n (sequence length) = 39836
-		(c) Chi^2               = 12034.755295
-		(d) Phi(m)	       = -6.414564
-		(e) Phi(m+1)	       = -6.956658
-		(f) ApEn                = 0.542093
+		(b) n (sequence length) = 100000
+		(c) Chi^2               = 1596.687279
+		(d) Phi(m)	       = -6.901504
+		(e) Phi(m+1)	       = -7.586668
+		(f) ApEn                = 0.685164
 		(g) Log(2)              = 0.693147
 		--------------------------------------------
 FAILURE		p_value = 0.000000
@@ -59,11 +59,11 @@ FAILURE		p_value = 0.000000
 		COMPUTATIONAL INFORMATION:
 		--------------------------------------------
 		(a) m (block length)    = 10
-		(b) n (sequence length) = 39836
-		(c) Chi^2               = 12060.244246
-		(d) Phi(m)	       = -6.411524
-		(e) Phi(m+1)	       = -6.953297
-		(f) ApEn                = 0.541773
+		(b) n (sequence length) = 100000
+		(c) Chi^2               = 1351.857691
+		(d) Phi(m)	       = -6.907959
+		(e) Phi(m+1)	       = -7.594346
+		(f) ApEn                = 0.686388
 		(g) Log(2)              = 0.693147
 		--------------------------------------------
 FAILURE		p_value = 0.000000
@@ -73,11 +73,11 @@ FAILURE		p_value = 0.000000
 		COMPUTATIONAL INFORMATION:
 		--------------------------------------------
 		(a) m (block length)    = 10
-		(b) n (sequence length) = 39836
-		(c) Chi^2               = 12378.685816
-		(d) Phi(m)	       = -6.379915
-		(e) Phi(m+1)	       = -6.917692
-		(f) ApEn                = 0.537777
+		(b) n (sequence length) = 100000
+		(c) Chi^2               = 1525.086614
+		(d) Phi(m)	       = -6.905701
+		(e) Phi(m+1)	       = -7.591223
+		(f) ApEn                = 0.685522
 		(g) Log(2)              = 0.693147
 		--------------------------------------------
 FAILURE		p_value = 0.000000
@@ -87,11 +87,11 @@ FAILURE		p_value = 0.000000
 		COMPUTATIONAL INFORMATION:
 		--------------------------------------------
 		(a) m (block length)    = 10
-		(b) n (sequence length) = 39836
-		(c) Chi^2               = 12082.782496
-		(d) Phi(m)	       = -6.406648
-		(e) Phi(m+1)	       = -6.948139
-		(f) ApEn                = 0.541491
+		(b) n (sequence length) = 100000
+		(c) Chi^2               = 1520.595271
+		(d) Phi(m)	       = -6.904636
+		(e) Phi(m+1)	       = -7.590180
+		(f) ApEn                = 0.685544
 		(g) Log(2)              = 0.693147
 		--------------------------------------------
 FAILURE		p_value = 0.000000
@@ -101,11 +101,11 @@ FAILURE		p_value = 0.000000
 		COMPUTATIONAL INFORMATION:
 		--------------------------------------------
 		(a) m (block length)    = 10
-		(b) n (sequence length) = 39836
-		(c) Chi^2               = 12032.341499
-		(d) Phi(m)	       = -6.422674
-		(e) Phi(m+1)	       = -6.964798
-		(f) ApEn                = 0.542124
+		(b) n (sequence length) = 100000
+		(c) Chi^2               = 1488.275106
+		(d) Phi(m)	       = -6.906830
+		(e) Phi(m+1)	       = -7.592536
+		(f) ApEn                = 0.685706
 		(g) Log(2)              = 0.693147
 		--------------------------------------------
 FAILURE		p_value = 0.000000
@@ -115,11 +115,11 @@ FAILURE		p_value = 0.000000
 		COMPUTATIONAL INFORMATION:
 		--------------------------------------------
 		(a) m (block length)    = 10
-		(b) n (sequence length) = 39836
-		(c) Chi^2               = 12151.246746
-		(d) Phi(m)	       = -6.391741
-		(e) Phi(m+1)	       = -6.932372
-		(f) ApEn                = 0.540631
+		(b) n (sequence length) = 100000
+		(c) Chi^2               = 1426.671564
+		(d) Phi(m)	       = -6.908318
+		(e) Phi(m+1)	       = -7.594332
+		(f) ApEn                = 0.686014
 		(g) Log(2)              = 0.693147
 		--------------------------------------------
 FAILURE		p_value = 0.000000
@@ -129,11 +129,11 @@ FAILURE		p_value = 0.000000
 		COMPUTATIONAL INFORMATION:
 		--------------------------------------------
 		(a) m (block length)    = 10
-		(b) n (sequence length) = 39836
-		(c) Chi^2               = 12212.080741
-		(d) Phi(m)	       = -6.397486
-		(e) Phi(m+1)	       = -6.937354
-		(f) ApEn                = 0.539868
+		(b) n (sequence length) = 100000
+		(c) Chi^2               = 1436.952667
+		(d) Phi(m)	       = -6.905337
+		(e) Phi(m+1)	       = -7.591299
+		(f) ApEn                = 0.685962
 		(g) Log(2)              = 0.693147
 		--------------------------------------------
 FAILURE		p_value = 0.000000
