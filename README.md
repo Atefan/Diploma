@@ -1,2 +1,2 @@
 # Diploma
-this is my GitHub repo for my doploma work 
+this is my GitHub repo for my True Random Number Generator
