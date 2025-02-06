@@ -1,0 +1,9 @@
+Manufacturer=Multicomp Pro
+PartNumber=MP008253
+PartCategory=LED
+PackageCategory=Other
+PinCount=6
+Version=2.2
+Released=2024-07-23 09:17:33
+Downloaded=2024-10-10 12:05:14
+3D=Y

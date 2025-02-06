@@ -1,0 +1,6 @@
+﻿  Button.cpp
+  SDLVisualizer.cpp
+C:\Users\stefa\source\Diploma_git\Diploma\V2\GUI\SDLVisualizer.cpp(100,22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  main.cpp
+  Generating Code...
+  GUI.vcxproj -> C:\Users\stefa\source\Diploma_git\Diploma\V2\GUI\x64\Debug\GUI.exe

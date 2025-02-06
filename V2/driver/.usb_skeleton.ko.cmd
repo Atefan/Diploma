@@ -1,1 +1,0 @@
-savedcmd_/home/stefan/driver/usb_skeleton.ko := ld -r -m elf_x86_64 -z noexecstack --build-id=sha1  -T scripts/module.lds -o /home/stefan/driver/usb_skeleton.ko /home/stefan/driver/usb_skeleton.o /home/stefan/driver/usb_skeleton.mod.o;  make -f ./arch/x86/Makefile.postlink /home/stefan/driver/usb_skeleton.ko

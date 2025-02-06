@@ -1,5 +1,0 @@
-/home/stefan/pico/my_code/Entrpy/build/_deps/picotool/picotool
-/home/stefan/pico/my_code/Entrpy/build/_deps/picotool/picotoolTargets.cmake
-/home/stefan/pico/my_code/Entrpy/build/_deps/picotool/picotoolTargets-release.cmake
-/home/stefan/pico/my_code/Entrpy/build/_deps/picotool/picotoolConfig.cmake
-/home/stefan/pico/my_code/Entrpy/build/_deps/picotool/picotoolConfigVersion.cmake
