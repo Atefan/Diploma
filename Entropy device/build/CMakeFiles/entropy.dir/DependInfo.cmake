@@ -68,7 +68,7 @@ set(CMAKE_TARGET_DEFINITIONS_ASM
   "PICO_32BIT=1"
   "PICO_BOARD=\"pico_w\""
   "PICO_BUILD=1"
-  "PICO_CMAKE_BUILD_TYPE=\"Debug\""
+  "PICO_CMAKE_BUILD_TYPE=\"Release\""
   "PICO_COPY_TO_RAM=0"
   "PICO_CXX_ENABLE_EXCEPTIONS=0"
   "PICO_NO_FLASH=0"
@@ -139,7 +139,7 @@ set(CMAKE_ASM_TARGET_INCLUDE_PATH
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/stefan/pico/my_code/Entrpy/dev_lowlevel.c" "CMakeFiles/entropy.dir/dev_lowlevel.c.o" "gcc" "CMakeFiles/entropy.dir/dev_lowlevel.c.o.d"
+  "/home/stefan/pico/my_code/Entrpy/entropy.c" "CMakeFiles/entropy.dir/entropy.c.o" "gcc" "CMakeFiles/entropy.dir/entropy.c.o.d"
   "/home/stefan/pico/pico-sdk/src/common/hardware_claim/claim.c" "CMakeFiles/entropy.dir/home/stefan/pico/pico-sdk/src/common/hardware_claim/claim.c.o" "gcc" "CMakeFiles/entropy.dir/home/stefan/pico/pico-sdk/src/common/hardware_claim/claim.c.o.d"
   "/home/stefan/pico/pico-sdk/src/common/pico_sync/critical_section.c" "CMakeFiles/entropy.dir/home/stefan/pico/pico-sdk/src/common/pico_sync/critical_section.c.o" "gcc" "CMakeFiles/entropy.dir/home/stefan/pico/pico-sdk/src/common/pico_sync/critical_section.c.o.d"
   "/home/stefan/pico/pico-sdk/src/common/pico_sync/lock_core.c" "CMakeFiles/entropy.dir/home/stefan/pico/pico-sdk/src/common/pico_sync/lock_core.c.o" "gcc" "CMakeFiles/entropy.dir/home/stefan/pico/pico-sdk/src/common/pico_sync/lock_core.c.o.d"

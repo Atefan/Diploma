@@ -17,7 +17,7 @@
 #define GREEN 11
 #define BLUE 12
 #define ANALOG 26
-#define CHARGE_PUMP1 4
+#define CHARGE_PUMP1 5
 #define CHARGE_PUMP2 3
 
 
@@ -30,19 +30,23 @@ void setup_PWM(uint gpio) {
     uint slice_num = pwm_gpio_to_slice_num(gpio);
 
     pwm_config config = pwm_get_default_config();
-    pwm_config_set_clkdiv(&config, 32.0f);  // Set clock divider
-    pwm_config_set_wrap(&config, 49);      // Set PWM period (TOP)
+    pwm_config_set_clkdiv(&config, 32.0f);
+    pwm_config_set_wrap(&config, 49);
 
     pwm_init(slice_num, &config, true);
-    pwm_set_gpio_level(gpio, 39);          // Set duty cycle (e.g., 80%)
-    // 78 kHz with 32 prescale Divider
+    pwm_set_gpio_level(gpio, 40); // Set duty cycle ( 40/50 --> 80% )
+    // 80 kHz with 32 prescale Divider
 }
 
 void readValues()
 {
-    gpio_put(RED, 1);
-    for (;;)
-        enqueue(adc_read());
+    bool red_on = false;
+    for (unsigned sample_count=0; ;sample_count++)
+    {
+        enqueue(adc_read()>>1);
+        if(!(sample_count & 0x7ffff))
+            gpio_put(RED, sample_count >> 19 & 1);
+    }
 }
 
 void setup() {
@@ -90,16 +94,12 @@ int main(void) {
         if(dequeue(&m.buf,sizeof m))
         {
             usb_start_transfer(usb_get_endpoint_configuration(EP2_IN_ADDR), (uint8_t *)&m, sizeof m);
-            
-            // if(i++ >= 10)
-            //     gpio_put(GREEN, 1);
-
         }
         
     
-        gpio_put(RED, 0);
-        gpio_put(GREEN, 0);
-        gpio_put(BLUE, 0);
+        // gpio_put(RED, 0);
+        // gpio_put(GREEN, 0);
+        // gpio_put(BLUE, 0);
         
     }
 }

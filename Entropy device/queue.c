@@ -35,7 +35,7 @@ bool enqueue(uint8_t data)
         if ((old.head >= old.tail && (old.head - old.tail == buffer_size - 1)) ||
             (old.head < old.tail && (old.tail - old.head == 1)))
         {
-            return false; // Queue is full
+            return false;
         }
 
         *new.head = data;
@@ -46,9 +46,8 @@ bool enqueue(uint8_t data)
         else
             new.head = old.head + 1;
 
+        //
     } while (!__atomic_compare_exchange_n(&queue.atomic, &old.atomic, new.atomic, true, __ATOMIC_RELEASE, __ATOMIC_RELAXED));
-
-    gpio_put(RED, 1);
 
     return true;
 }
@@ -62,7 +61,7 @@ bool dequeue(void *ptr, int size)
         int available_data = (old.head >= old.tail) ? (old.head - old.tail) : (buffer_size - (old.tail - old.head));
         if (available_data < size)
         {
-            return false; // Not enough data to dequeue
+            return false;
         }
 
         // Calculate the new tail position
@@ -72,20 +71,17 @@ bool dequeue(void *ptr, int size)
             int sz1 = buf + buffer_size - old.tail; // Space available till end
             int sz2 = size - sz1;                  // Remaining size after wrapping
 
-            memcpy(ptr, old.tail, sz1);             // Copy first part
+            memcpy(ptr, old.tail, sz1);             // Copy the end part
             memcpy((uint8_t *)ptr + sz1, buf, sz2); // Copy second part
             new.tail = buf + sz2;                   // Update tail after wrap
         }
         else
         {
             memcpy(ptr, old.tail, size);
-            new.tail = old.tail + size; // Update tail normally
+            new.tail = old.tail + size;
         }
 
     } while (!__atomic_compare_exchange_n(&queue.atomic, &old.atomic, new.atomic, true, __ATOMIC_RELEASE, __ATOMIC_RELAXED));
-
-    gpio_put(BLUE, 1);
-    gpio_put(GREEN, 1);
 
     return true;
 }

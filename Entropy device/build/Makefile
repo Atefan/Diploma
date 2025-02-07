@@ -130,6 +130,32 @@ entropy/fast:
 .PHONY : entropy/fast
 
 #=============================================================================
+# Target rules for targets named picotoolForceReconfigure
+
+# Build rule for target.
+picotoolForceReconfigure: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 picotoolForceReconfigure
+.PHONY : picotoolForceReconfigure
+
+# fast build rule for target.
+picotoolForceReconfigure/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picotoolForceReconfigure.dir/build.make CMakeFiles/picotoolForceReconfigure.dir/build
+.PHONY : picotoolForceReconfigure/fast
+
+#=============================================================================
+# Target rules for targets named picotoolBuild
+
+# Build rule for target.
+picotoolBuild: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 picotoolBuild
+.PHONY : picotoolBuild
+
+# fast build rule for target.
+picotoolBuild/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picotoolBuild.dir/build.make CMakeFiles/picotoolBuild.dir/build
+.PHONY : picotoolBuild/fast
+
+#=============================================================================
 # Target rules for targets named bs2_default
 
 # Build rule for target.
@@ -194,29 +220,29 @@ cyw43_driver_picow_cyw43_bus_pio_spi_pio_h/fast:
 	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h.dir/build.make pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h.dir/build
 .PHONY : cyw43_driver_picow_cyw43_bus_pio_spi_pio_h/fast
 
-dev_lowlevel.o: dev_lowlevel.c.o
-.PHONY : dev_lowlevel.o
+entropy.o: entropy.c.o
+.PHONY : entropy.o
 
 # target to build an object file
-dev_lowlevel.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/entropy.dir/build.make CMakeFiles/entropy.dir/dev_lowlevel.c.o
-.PHONY : dev_lowlevel.c.o
+entropy.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/entropy.dir/build.make CMakeFiles/entropy.dir/entropy.c.o
+.PHONY : entropy.c.o
 
-dev_lowlevel.i: dev_lowlevel.c.i
-.PHONY : dev_lowlevel.i
+entropy.i: entropy.c.i
+.PHONY : entropy.i
 
 # target to preprocess a source file
-dev_lowlevel.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/entropy.dir/build.make CMakeFiles/entropy.dir/dev_lowlevel.c.i
-.PHONY : dev_lowlevel.c.i
+entropy.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/entropy.dir/build.make CMakeFiles/entropy.dir/entropy.c.i
+.PHONY : entropy.c.i
 
-dev_lowlevel.s: dev_lowlevel.c.s
-.PHONY : dev_lowlevel.s
+entropy.s: entropy.c.s
+.PHONY : entropy.s
 
 # target to generate assembly for a file
-dev_lowlevel.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/entropy.dir/build.make CMakeFiles/entropy.dir/dev_lowlevel.c.s
-.PHONY : dev_lowlevel.c.s
+entropy.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/entropy.dir/build.make CMakeFiles/entropy.dir/entropy.c.s
+.PHONY : entropy.c.s
 
 home/stefan/pico/pico-sdk/src/common/hardware_claim/claim.o: home/stefan/pico/pico-sdk/src/common/hardware_claim/claim.c.o
 .PHONY : home/stefan/pico/pico-sdk/src/common/hardware_claim/claim.o
@@ -1492,13 +1518,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... bs2_default_bin"
 	@echo "... cyw43_driver_picow_cyw43_bus_pio_spi_pio_h"
+	@echo "... picotoolBuild"
+	@echo "... picotoolForceReconfigure"
 	@echo "... pioasmBuild"
 	@echo "... bs2_default"
 	@echo "... bs2_default_library"
 	@echo "... entropy"
-	@echo "... dev_lowlevel.o"
-	@echo "... dev_lowlevel.i"
-	@echo "... dev_lowlevel.s"
+	@echo "... entropy.o"
+	@echo "... entropy.i"
+	@echo "... entropy.s"
 	@echo "... home/stefan/pico/pico-sdk/src/common/hardware_claim/claim.o"
 	@echo "... home/stefan/pico/pico-sdk/src/common/hardware_claim/claim.i"
 	@echo "... home/stefan/pico/pico-sdk/src/common/hardware_claim/claim.s"

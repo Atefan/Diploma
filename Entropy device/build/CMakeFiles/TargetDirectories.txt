@@ -1,4 +1,6 @@
 /home/stefan/pico/my_code/Entrpy/build/CMakeFiles/entropy.dir
+/home/stefan/pico/my_code/Entrpy/build/CMakeFiles/picotoolForceReconfigure.dir
+/home/stefan/pico/my_code/Entrpy/build/CMakeFiles/picotoolBuild.dir
 /home/stefan/pico/my_code/Entrpy/build/CMakeFiles/edit_cache.dir
 /home/stefan/pico/my_code/Entrpy/build/CMakeFiles/rebuild_cache.dir
 /home/stefan/pico/my_code/Entrpy/build/pico-sdk/CMakeFiles/edit_cache.dir

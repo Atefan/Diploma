@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/entropy.dir/dev_lowlevel.c.o"
-  "CMakeFiles/entropy.dir/dev_lowlevel.c.o.d"
+  "CMakeFiles/entropy.dir/entropy.c.o"
+  "CMakeFiles/entropy.dir/entropy.c.o.d"
   "CMakeFiles/entropy.dir/home/stefan/pico/pico-sdk/src/common/hardware_claim/claim.c.o"
   "CMakeFiles/entropy.dir/home/stefan/pico/pico-sdk/src/common/hardware_claim/claim.c.o.d"
   "CMakeFiles/entropy.dir/home/stefan/pico/pico-sdk/src/common/pico_sync/critical_section.c.o"

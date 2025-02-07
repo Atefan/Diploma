@@ -69,19 +69,19 @@ include CMakeFiles/entropy.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/entropy.dir/flags.make
 
-CMakeFiles/entropy.dir/dev_lowlevel.c.o: CMakeFiles/entropy.dir/flags.make
-CMakeFiles/entropy.dir/dev_lowlevel.c.o: ../dev_lowlevel.c
-CMakeFiles/entropy.dir/dev_lowlevel.c.o: CMakeFiles/entropy.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/stefan/pico/my_code/Entrpy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/entropy.dir/dev_lowlevel.c.o"
-	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/entropy.dir/dev_lowlevel.c.o -MF CMakeFiles/entropy.dir/dev_lowlevel.c.o.d -o CMakeFiles/entropy.dir/dev_lowlevel.c.o -c /home/stefan/pico/my_code/Entrpy/dev_lowlevel.c
+CMakeFiles/entropy.dir/entropy.c.o: CMakeFiles/entropy.dir/flags.make
+CMakeFiles/entropy.dir/entropy.c.o: ../entropy.c
+CMakeFiles/entropy.dir/entropy.c.o: CMakeFiles/entropy.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/stefan/pico/my_code/Entrpy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/entropy.dir/entropy.c.o"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/entropy.dir/entropy.c.o -MF CMakeFiles/entropy.dir/entropy.c.o.d -o CMakeFiles/entropy.dir/entropy.c.o -c /home/stefan/pico/my_code/Entrpy/entropy.c
 
-CMakeFiles/entropy.dir/dev_lowlevel.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/entropy.dir/dev_lowlevel.c.i"
-	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/stefan/pico/my_code/Entrpy/dev_lowlevel.c > CMakeFiles/entropy.dir/dev_lowlevel.c.i
+CMakeFiles/entropy.dir/entropy.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/entropy.dir/entropy.c.i"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/stefan/pico/my_code/Entrpy/entropy.c > CMakeFiles/entropy.dir/entropy.c.i
 
-CMakeFiles/entropy.dir/dev_lowlevel.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/entropy.dir/dev_lowlevel.c.s"
-	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/stefan/pico/my_code/Entrpy/dev_lowlevel.c -o CMakeFiles/entropy.dir/dev_lowlevel.c.s
+CMakeFiles/entropy.dir/entropy.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/entropy.dir/entropy.c.s"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/stefan/pico/my_code/Entrpy/entropy.c -o CMakeFiles/entropy.dir/entropy.c.s
 
 CMakeFiles/entropy.dir/usb_protocol.c.o: CMakeFiles/entropy.dir/flags.make
 CMakeFiles/entropy.dir/usb_protocol.c.o: ../usb_protocol.c
@@ -914,7 +914,7 @@ CMakeFiles/entropy.dir/home/stefan/pico/pico-sdk/src/rp2_common/pico_multicore/m
 
 # Object files for target entropy
 entropy_OBJECTS = \
-"CMakeFiles/entropy.dir/dev_lowlevel.c.o" \
+"CMakeFiles/entropy.dir/entropy.c.o" \
 "CMakeFiles/entropy.dir/usb_protocol.c.o" \
 "CMakeFiles/entropy.dir/queue.c.o" \
 "CMakeFiles/entropy.dir/home/stefan/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.o" \
@@ -979,7 +979,7 @@ entropy_OBJECTS = \
 # External object files for target entropy
 entropy_EXTERNAL_OBJECTS =
 
-entropy.elf: CMakeFiles/entropy.dir/dev_lowlevel.c.o
+entropy.elf: CMakeFiles/entropy.dir/entropy.c.o
 entropy.elf: CMakeFiles/entropy.dir/usb_protocol.c.o
 entropy.elf: CMakeFiles/entropy.dir/queue.c.o
 entropy.elf: CMakeFiles/entropy.dir/home/stefan/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.o

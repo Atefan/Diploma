@@ -84,7 +84,7 @@ struct usb_device_descriptor {
     uint16_t bcdDevice;
     uint8_t iManufacturer;
     uint8_t iProduct;
-    uint8_t iSerialNumber;
+    uint8_t iSerialNumber; 
     uint8_t bNumConfigurations;
 } __packed;
 

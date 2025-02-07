@@ -73,6 +73,8 @@ preinstall: pico-sdk/preinstall
 
 # The main recursive "clean" target.
 clean: CMakeFiles/entropy.dir/clean
+clean: CMakeFiles/picotoolForceReconfigure.dir/clean
+clean: CMakeFiles/picotoolBuild.dir/clean
 clean: pico-sdk/clean
 .PHONY : clean
 
@@ -1777,6 +1779,7 @@ pico-sdk/tools/clean:
 # Target rules for target CMakeFiles/entropy.dir
 
 # All Build rule for target.
+CMakeFiles/entropy.dir/all: CMakeFiles/picotoolBuild.dir/all
 CMakeFiles/entropy.dir/all: pico-sdk/src/rp2040/boot_stage2/CMakeFiles/bs2_default_library.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/entropy.dir/build.make CMakeFiles/entropy.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/entropy.dir/build.make CMakeFiles/entropy.dir/build
@@ -1785,7 +1788,7 @@ CMakeFiles/entropy.dir/all: pico-sdk/src/rp2040/boot_stage2/CMakeFiles/bs2_defau
 
 # Build rule for subdir invocation for target.
 CMakeFiles/entropy.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/stefan/pico/my_code/Entrpy/build/CMakeFiles 67
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/stefan/pico/my_code/Entrpy/build/CMakeFiles 76
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/entropy.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/stefan/pico/my_code/Entrpy/build/CMakeFiles 0
 .PHONY : CMakeFiles/entropy.dir/rule
@@ -1798,6 +1801,58 @@ entropy: CMakeFiles/entropy.dir/rule
 CMakeFiles/entropy.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/entropy.dir/build.make CMakeFiles/entropy.dir/clean
 .PHONY : CMakeFiles/entropy.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/picotoolForceReconfigure.dir
+
+# All Build rule for target.
+CMakeFiles/picotoolForceReconfigure.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picotoolForceReconfigure.dir/build.make CMakeFiles/picotoolForceReconfigure.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picotoolForceReconfigure.dir/build.make CMakeFiles/picotoolForceReconfigure.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/stefan/pico/my_code/Entrpy/build/CMakeFiles --progress-num= "Built target picotoolForceReconfigure"
+.PHONY : CMakeFiles/picotoolForceReconfigure.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/picotoolForceReconfigure.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/stefan/pico/my_code/Entrpy/build/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/picotoolForceReconfigure.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/stefan/pico/my_code/Entrpy/build/CMakeFiles 0
+.PHONY : CMakeFiles/picotoolForceReconfigure.dir/rule
+
+# Convenience name for target.
+picotoolForceReconfigure: CMakeFiles/picotoolForceReconfigure.dir/rule
+.PHONY : picotoolForceReconfigure
+
+# clean rule for target.
+CMakeFiles/picotoolForceReconfigure.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picotoolForceReconfigure.dir/build.make CMakeFiles/picotoolForceReconfigure.dir/clean
+.PHONY : CMakeFiles/picotoolForceReconfigure.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/picotoolBuild.dir
+
+# All Build rule for target.
+CMakeFiles/picotoolBuild.dir/all: CMakeFiles/picotoolForceReconfigure.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picotoolBuild.dir/build.make CMakeFiles/picotoolBuild.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picotoolBuild.dir/build.make CMakeFiles/picotoolBuild.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/stefan/pico/my_code/Entrpy/build/CMakeFiles --progress-num=70,71,72,73,74,75,76,77,78 "Built target picotoolBuild"
+.PHONY : CMakeFiles/picotoolBuild.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/picotoolBuild.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/stefan/pico/my_code/Entrpy/build/CMakeFiles 9
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/picotoolBuild.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/stefan/pico/my_code/Entrpy/build/CMakeFiles 0
+.PHONY : CMakeFiles/picotoolBuild.dir/rule
+
+# Convenience name for target.
+picotoolBuild: CMakeFiles/picotoolBuild.dir/rule
+.PHONY : picotoolBuild
+
+# clean rule for target.
+CMakeFiles/picotoolBuild.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picotoolBuild.dir/build.make CMakeFiles/picotoolBuild.dir/clean
+.PHONY : CMakeFiles/picotoolBuild.dir/clean
 
 #=============================================================================
 # Target rules for target pico-sdk/src/rp2040/boot_stage2/CMakeFiles/bs2_default.dir
@@ -1884,7 +1939,7 @@ pico-sdk/src/rp2040/boot_stage2/CMakeFiles/bs2_default_library.dir/clean:
 pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/pioasmBuild.dir/all:
 	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/pioasmBuild.dir/build.make pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/pioasmBuild.dir/depend
 	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/pioasmBuild.dir/build.make pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/pioasmBuild.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/stefan/pico/my_code/Entrpy/build/CMakeFiles --progress-num=70,71,72,73,74,75,76,77 "Built target pioasmBuild"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/stefan/pico/my_code/Entrpy/build/CMakeFiles --progress-num=79,80,81,82,83,84,85,86 "Built target pioasmBuild"
 .PHONY : pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/pioasmBuild.dir/all
 
 # Build rule for subdir invocation for target.

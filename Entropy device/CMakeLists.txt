@@ -16,7 +16,7 @@ set(FAMILY rp2040)
 set(BOARD pico_sdk)
 
 add_executable(entropy
-        dev_lowlevel.c
+        entropy.c
 	usb_protocol.c
 	queue.c
         )

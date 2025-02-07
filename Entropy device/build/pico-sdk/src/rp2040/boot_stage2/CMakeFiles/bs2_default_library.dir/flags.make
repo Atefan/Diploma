@@ -6,5 +6,5 @@ ASM_DEFINES =
 
 ASM_INCLUDES = 
 
-ASM_FLAGS = -mcpu=cortex-m0plus -mthumb -Og -g
+ASM_FLAGS = -mcpu=cortex-m0plus -mthumb -g -O3 -DNDEBUG
 
