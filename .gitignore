@@ -1,0 +1,39 @@
+# ── Entropy device firmware: CMake / Pico SDK build output ──
+Entropy device/build/
+
+# ── GUI: Visual Studio build output ──
+GUI/.vs/
+GUI/x64/
+GUI/GUI/x64/
+*.obj
+*.pdb
+*.ilk
+*.idb
+*.tlog
+*.suo
+*.vsidx
+*.VC.db
+*.log
+
+# ── driver: compiled Linux kernel module output ──
+driver/*.ko
+driver/*.o
+driver/*.mod
+driver/*.mod.c
+driver/Module.symvers
+driver/modules.order
+driver/.tmp_versions/
+
+# ── Pico_PCB (KiCad): regenerable cache and auto-backups ──
+Pico_PCB/Entry/Entry-backups/
+Pico_PCB/Entry/fp-info-cache
+
+# ── testing (NIST STS): build output + generated test-run results ──
+testing/sts-2.1.2/sts-2.1.2/obj/
+testing/sts-2.1.2/sts-2.1.2/experiments/
+
+# ── OS / editor cruft ──
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
